@@ -29,7 +29,7 @@
       inset:0;
       z-index:1;
       pointer-events:none;
-      display:none; /* <--- معطل افتراضياً */
+      display:none;
     }
     .dot{
       position:absolute;
@@ -107,6 +107,21 @@
     }
     .dud { 
       color: #060; 
+    }
+    /* تأثير الكتابة التدريجي */
+    .typewriter{
+      font-size:1.2rem;
+      margin-top:20px;
+      color:#0f0;
+      min-height:80px;
+      text-align:center;
+    }
+    .blink {
+      animation: blink 1s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
     .works-container{
       width:95%;
@@ -243,6 +258,9 @@
   <!-- تأثير الـ TextScramble -->
   <div class="scramble-text" id="scrambleText"></div>
 
+  <!-- تأثير الكتابة التدريجي -->
+  <div id="typewriter" class="typewriter"></div>
+
   <!-- عرض الأعمال -->
   <div class="works-container" id="worksContainer"></div>
 
@@ -259,7 +277,7 @@
     <button class="btn" onclick="toggleEffects()">✨ تشغيل/إيقاف التأثيرات</button>
   </div>
 
-  <footer>destory your systems!</footer>
+  <footer>My dream is to succeed and travel, God willing.</footer>
 </div>
 
 <!-- يوتيوب خفي -->
@@ -276,7 +294,6 @@ const worksData = [
   {name: "lovers anime (edit + add)", status: "مكتمل", side: "وسط"},
   {name: "service mail (edit)", status: "مكتمل", side: "يسار"},
   {name: "more", status: "غير مكتمل", side: "يمين"},
-  
   // زيد أو عدّل أي عدد من الأعمال هنا...
 ];
 // ==========================================
@@ -386,10 +403,40 @@ function changeLangWithScramble() {
   document.getElementById('title').textContent = t.title;
   document.getElementById('quote').textContent = t.quote;
   document.getElementById('launchMsg').textContent = t.launchMsg;
+  
+  // أعد تشغيل الكتابة التدريجي باللغة الجديدة
+  resetTypewriter();
 }
 
 // تفعيل تغيير اللغة مع الـ scramble
 document.getElementById('lang').addEventListener('change', changeLangWithScramble);
+// ==========================================
+
+// ========== تأثير الكتابة التدريجي ==========
+const typewriterText = {
+  ar: "أهلاً بالعالم، هذا النص يُكتب الآن حرفاً حرفاً...",
+  en: "Hello world, this text is being written letter by letter..."
+};
+
+let typeIndex = 0;
+let typeTarget = document.getElementById('typewriter');
+
+function startTypewriter() {
+  const txt = typewriterText[currentLang];
+  if (typeIndex < txt.length) {
+    typeTarget.innerHTML = txt.substring(0, typeIndex + 1) + '<span class="blink">|</span>';
+    typeIndex++;
+    setTimeout(startTypewriter, 60);
+  } else {
+    typeTarget.innerHTML = txt + '<span class="blink">|</span>';
+  }
+}
+
+function resetTypewriter() {
+    typeIndex = 0;
+    typeTarget.innerHTML = '';
+    startTypewriter();
+}
 // ==========================================
 
 // إنشاء النقاط العائمة (15 نقطة فقط)
@@ -520,6 +567,7 @@ function loadYT(){
 // تشغيل الـ scramble وتحميل الـ youtube عند أول تفاعل
 document.addEventListener('click',function loadOnce(){
   startScramble();
+  startTypewriter();
   loadYT();
   document.removeEventListener('click',loadOnce);
 },{once:true});
