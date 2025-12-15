@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>work and public</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{
+      background:#000;
+      color:#0f0;
+      font-family:'Cairo',sans-serif;
+      overflow-x:hidden;
+      min-height:100vh;
+    }
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:radial-gradient(circle at 20% 30%,rgba(0,255,0,.08) 0%,transparent 40%),
+                radial-gradient(circle at 80% 70%,rgba(255,255,0,.06) 0%,transparent 40%);
+      z-index:0;
+      pointer-events:none;
+    }
+    .floating-dots{
+      position:fixed;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+      display:none; /* <--- معطل افتراضياً */
+    }
+    .dot{
+      position:absolute;
+      width:4px;height:4px;
+      background:#0f0;
+      border-radius:50%;
+      box-shadow:0 0 6px #0f0;
+      animation:float 12s infinite linear;
+    }
+    @keyframes float{
+      0%{transform:translateY(110vh) scale(1);opacity:0}
+      10%{opacity:1}
+      90%{opacity:1}
+      100%{transform:translateY(-10vh) scale(1.8);opacity:0}
+    }
+    .content{
+      position:relative;
+      z-index:2;
+      text-align:center;
+      padding:40px 20px 80px;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+    h1.glitch{
+      font-size:2.8rem;
+      margin-bottom:20px;
+      text-shadow:0 0 5px #0f0,0 0 10px #0f0;
+      animation:glitch 2.5s infinite alternate;
+    }
+    @keyframes glitch{
+      0%{text-shadow:0 0 5px #0f0,0 0 10px #0f0}
+      25%{text-shadow:0 0 5px #ff0,0 0 10px #ff0}
+      50%{text-shadow:0 0 5px #0ff,0 0 10px #0ff}
+      75%{text-shadow:0 0 5px #f0f,0 0 10px #f0f}
+      100%{text-shadow:0 0 5px #0f0,0 0 10px #0f0}
+    }
+    .quote{
+      max-width:700px;
+      margin:20px auto 30px;
+      font-size:1.3rem;
+      line-height:1.7;
+      color:#fffc;
+      text-shadow:0 0 3px #fff3;
+    }
+    .lang-switch{
+      position:fixed;
+      top:15px;right:15px;
+      background:#0008;
+      border:1px solid #0f0;
+      border-radius:5px;
+      padding:5px;
+      z-index:10;
+    }
+    select{
+      background:#000;
+      color:#0f0;
+      border:none;
+      padding:6px 10px;
+      font-family:'Cairo',sans-serif;
+    }
+    .countdown-box{
+      margin:20px 0 30px;
+      font-size:1.4rem;
+      color:#ff0;
+      text-shadow:0 0 6px #ff0;
+    }
+    .scramble-text{
+      font-size:1.8rem;
+      margin:20px 0;
+      min-height:50px;
+      color:#0f0;
+      text-shadow:0 0 5px #0f0;
+    }
+    .dud { 
+      color: #060; 
+    }
+    .works-container{
+      width:95%;
+      max-width:1000px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,280px);
+      gap:20px;
+      justify-content:center;
+      margin-bottom:40px;
+    }
+    .work-card{
+      background:#0f011a;
+      border:1px solid #0f0;
+      border-radius:8px;
+      padding:15px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      position:relative;
+    }
+    .work-card.completed{
+      background:#003300;
+      border-color:#0f0;
+    }
+    .work-name{
+      color:#fff;
+      font-size:1.1rem;
+    }
+    .work-side{
+      position:absolute;
+      top:5px;left:8px;
+      font-size:.7rem;
+      color:#0ff;
+      background:#0006;
+      padding:2px 6px;
+      border-radius:3px;
+    }
+    .work-status{
+      color:#0ff;
+      font-weight:bold;
+    }
+    .work-card.completed .work-status{
+      color:#0f0;
+    }
+    .screenshots{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:15px;
+      margin-top:25px;
+    }
+    .shot{
+      width:140px;
+      height:80px;
+      background:#000;
+      border:1px solid #0f0;
+      border-radius:4px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:1rem;
+      color:#0f0;
+      box-shadow:0 0 6px #0f0;
+      opacity:0;
+      transform:scale(.9);
+      animation:fadeIn .6s forwards;
+    }
+    @keyframes fadeIn{to{opacity:1;transform:scale(1)}}
+    .launch-msg{
+      margin-top:30px;
+      font-size:1.3rem;
+      color:#f0f;
+      text-shadow:0 0 6px #f0f;
+    }
+    .controls{
+      display:flex;
+      gap:15px;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin-top:30px;
+    }
+    .btn{
+      padding:10px 20px;
+      background:#000;
+      border:1px solid #0f0;
+      color:#0f0;
+      border-radius:4px;
+      cursor:pointer;
+      font-family:'Cairo',sans-serif;
+      transition:.3s;
+    }
+    .btn:hover{
+      background:#0f0;
+      color:#000;
+      box-shadow:0 0 10px #0f0;
+    }
+    footer{
+      margin-top:60px;
+      font-size:.9rem;
+      color:#0a0;
+    }
+    @media(max-width:600px){
+      h1.glitch{font-size:2.2rem}
+      .quote{font-size:1.1rem}
+    }
+  </style>
+</head>
+<body>
+
+<!-- النقاط العائمة -->
+<div class="floating-dots" id="dots"></div>
+
+<!-- تبديل اللغة -->
+<div class="lang-switch">
+  <select id="lang">
+    <option value="ar">العربية</option>
+    <option value="en">English</option>
+  </select>
+</div>
+
+<!-- المحتوى -->
+<div class="content">
+  <h1 class="glitch" id="title">مرحباً بالجميع</h1>
+
+  <div class="quote" id="quote">
+    عندما تكون عازف الحان، وعندما تبدأ بالعزف معزوفتك أو معزوفتي، يسمعونها الناس، يجعلهم منبهرين من معزوفتك أو معزوفتي، تكون سر معرفتك وجودتك. إذا لم تعزف، لن يلتف حولك أحد، رغم أنك تعمل بالجد، وهنا لن يعزف أبداً، ويعزف معزوفة الكذب لكي ينجذب الناس، وعندما تكشف الناس أنك لست عازفاً أبداً، لن يأتي إليك أحد. تذكر ماذا قلت لك.
+  </div>
+
+  <!-- العداد التنازلي العام -->
+  <div class="countdown-box">
+    العدّاد التنازلي للإطلاق: <span id="countdown">--:--:--</span>
+  </div>
+
+  <!-- تأثير الـ TextScramble -->
+  <div class="scramble-text" id="scrambleText"></div>
+
+  <!-- عرض الأعمال -->
+  <div class="works-container" id="worksContainer"></div>
+
+  <!-- لقطات الأعمال -->
+  <div class="screenshots" id="shots"></div>
+
+  <!-- رسالة الإطلاق -->
+  <div class="launch-msg" id="launchMsg">بعد إكمال الأعمال، سيتم إطلاقها حسب رقم العمل بالترتيب ❤️😊</div>
+
+  <!-- أزرار التحكم -->
+  <div class="controls">
+    <button class="btn" id="musicBtn" onclick="toggleMusic()">🎵 تشغيل / إيقاف الموسيقى</button>
+    <button class="btn" onclick="showInfo()">ℹ️ معلومات</button>
+    <button class="btn" onclick="toggleEffects()">✨ تشغيل/إيقاف التأثيرات</button>
+  </div>
+
+  <footer>destory your systems!</footer>
+</div>
+
+<!-- يوتيوب خفي -->
+<div id="player" style="display:none;"></div>
+
+<script>
+// ========== التحكم بالتاريخ والوقت ==========
+const launchDate = new Date('2025-12-25T00:00:00'); // عدّل التاريخ والساعة هنا
+// ==========================================
+
+// ========== أضف أو عدّل أعمالك هنا ==========
+const worksData = [
+  {name: "website not name", status: "قيد الإنشاء", side: "يمين"},
+  {name: "lovers anime (edit + add)", status: "مكتمل", side: "وسط"},
+  {name: "service mail (edit)", status: "مكتمل", side: "يسار"},
+  {name: "more", status: "غير مكتمل", side: "يمين"},
+  
+  // زيد أو عدّل أي عدد من الأعمال هنا...
+];
+// ==========================================
+
+// ========== TextScramble مع دعم اللغة ==========
+const scramblePhrases = {
+  ar: ['مرحباً بالجميع', 'العمل قيد الإنشاء', 'سيتم الإطلاق قريباً'],
+  en: ['Welcome Everyone', 'Work in Progress', 'Launching Soon']
+};
+
+let currentLang = 'ar';
+let scrambleInterval;
+
+class TextScramble {
+  constructor(el) {
+    this.el = el;
+    this.chars = '!@#$%^&*()_+=-{}[]|:;"<>,.?/~';
+    this.update = this.update.bind(this);
+  }
+  
+  setText(newText) {
+    const oldText = this.el.innerText;
+    const length = Math.max(oldText.length, newText.length);
+    const promise = new Promise(resolve => this.resolve = resolve);
+    this.queue = [];
+    
+    for (let i = 0; i < length; i++) {
+      const from = oldText[i] || '';
+      const to = newText[i] || '';
+      const start = Math.floor(Math.random() * 40);
+      const end = start + Math.floor(Math.random() * 40);
+      this.queue.push({ from, to, start, end });
+    }
+    
+    cancelAnimationFrame(this.frameRequest);
+    this.frame = 0;
+    this.update();
+    return promise;
+  }
+  
+  update() {
+    let output = '';
+    let complete = 0;
+    
+    for (let i = 0, n = this.queue.length; i < n; i++) {
+      let { from, to, start, end, char } = this.queue[i];
+      
+      if (this.frame >= end) {
+        complete++;
+        output += to;
+      } else if (this.frame >= start) {
+        if (!char || Math.random() < 0.28) {
+          char = this.randomChar();
+          this.queue[i].char = char;
+        }
+        output += `<span class="dud">${char}</span>`;
+      } else {
+        output += from;
+      }
+    }
+    
+    this.el.innerHTML = output;
+    
+    if (complete === this.queue.length) {
+      this.resolve();
+    } else {
+      this.frameRequest = requestAnimationFrame(this.update);
+      this.frame++;
+    }
+  }
+  
+  randomChar() {
+    return this.chars[Math.floor(Math.random() * this.chars.length)];
+  }
+}
+
+function startScramble() {
+  const el = document.getElementById('scrambleText');
+  if (!el) return;
+  const phrases = scramblePhrases[currentLang];
+  const fx = new TextScramble(el);
+  let counter = 0;
+
+  function next() {
+    fx.setText(phrases[counter]).then(() => {
+      setTimeout(next, 3000);
+    });
+    counter = (counter + 1) % phrases.length;
+  }
+
+  next();
+}
+
+// دمج تأثير scramble مع تغيير اللغة
+function changeLangWithScramble() {
+  const lang = document.getElementById('lang').value;
+  currentLang = lang;
+  
+  // غيّر العبارة فوراً بـ scramble
+  const el = document.getElementById('scrambleText');
+  const fx = new TextScramble(el);
+  const newPhrase = scramblePhrases[lang][0];
+  fx.setText(newPhrase);
+  
+  // عدّل باقي النصوص
+  const t = translations[lang];
+  document.getElementById('title').textContent = t.title;
+  document.getElementById('quote').textContent = t.quote;
+  document.getElementById('launchMsg').textContent = t.launchMsg;
+}
+
+// تفعيل تغيير اللغة مع الـ scramble
+document.getElementById('lang').addEventListener('change', changeLangWithScramble);
+// ==========================================
+
+// إنشاء النقاط العائمة (15 نقطة فقط)
+let dotsCreated = false;
+function createDots(){
+  if(dotsCreated) return;
+  dotsCreated = true;
+  const container=document.getElementById('dots');
+  container.style.display = 'block';
+  for(let i=0;i<15;i++){
+    const d=document.createElement('div');
+    d.className='dot';
+    d.style.left=Math.random()*100+'%';
+    d.style.animationDelay=Math.random()*12+'s';
+    d.style.animationDuration=(10+Math.random()*8)+'s';
+    container.appendChild(d);
+  }
+}
+
+// إيقاف التأثيرات
+function toggleEffects(){
+  const dots = document.getElementById('dots');
+  if(dots.style.display === 'block'){
+    dots.style.display = 'none';
+    if(window.requestIdleCallback) window.requestIdleCallback(()=>cancelAnimationFrame(0));
+  } else {
+    createDots();
+  }
+}
+
+// عداد تنازلي خفيف (requestAnimationFrame)
+let rafId;
+function startCountdown(){
+  function frame(){
+    const now=new Date();
+    const diff=Math.max(0,launchDate-now);
+    const d=Math.floor(diff/(1000*60*60*24));
+    const h=String(Math.floor((diff%(1000*60*60*24))/(1000*60*60))).padStart(2,'0');
+    const m=String(Math.floor((diff%(1000*60*60))/(1000*60))).padStart(2,'0');
+    const s=String(Math.floor((diff%(1000*60))/1000)).padStart(2,'0');
+    document.getElementById('countdown').textContent=`${d} يوم ${h}:${m}:${s}`;
+    rafId = requestAnimationFrame(frame);
+  }
+  frame();
+}
+startCountdown();
+
+// عرض الأعمال
+function renderWorks(){
+  const container=document.getElementById('worksContainer');
+  container.innerHTML='';
+  worksData.forEach(work=>{
+    const card=document.createElement('div');
+    card.className=`work-card ${work.status==='مكتمل'?'completed':''}`;
+    card.innerHTML=`
+      <span class="work-side">${work.side}</span>
+      <div class="work-name">${work.name}</div>
+      <div class="work-status">${work.status}</div>
+    `;
+    container.appendChild(card);
+    if(work.status==='مكتمل')addScreenshot(work.name);
+  });
+}
+renderWorks();
+
+// إضافة لقطة شاشة
+function addScreenshot(text){
+  const box=document.getElementById('shots');
+  const shot=document.createElement('div');
+  shot.className='shot';
+  shot.textContent=text;
+  shot.style.animationDelay='0s';
+  box.appendChild(shot);
+}
+
+// ترجمات
+const translations={
+  ar:{
+    title:'مرحباً بالجميع',
+    quote:'عندما تكون عازف الحان، وعندما تبدأ بالعزف معزوفتك أو معزوفتي، يسمعونها الناس، يجعلهم منبهرين من معزوفتك أو معزوفتي، تكون سر معرفتك وجودتك. إذا لم تعزف، لن يلتف حولك أحد، رغم أنك تعمل بالجد، وهنا لن يعزف أبداً، ويعزف معزوفة الكذب لكي ينجذب الناس، وعندما تكشف الناس أنك لست عازفاً أبداً، لن يأتي إليك أحد. تذكر ماذا قلت لك.',
+    launchMsg:'بعد إكمال الأعمال، سيتم إطلاقها حسب رقم العمل بالترتيب ❤️😊'
+  },
+  en:{
+    title:'Welcome Everyone',
+    quote:'When you are a melody player, and when you start playing your or my melody, people listen to it, making them amazed by your or my melody, it becomes the secret of your knowledge and quality. If you do not play, no one will gather around you, even though you work hard, and here he will never play, but plays the melody of lies to attract people, and when people discover that you are not a player at all, no one will come to you. Remember what I told you.',
+    launchMsg:'After completing the works, they will be launched according to the work number in order ❤️😊'
+  }
+};
+
+// موسيقى يوتيوب (تُشغّل فقط عند الضغط)
+let player,playing=false;
+function onYouTubeIframeAPIReady(){
+  player=new YT.Player('player',{
+    height:'0',width:'0',videoId:'I-AlgFRP5CM',
+    playerVars:{autoplay:0,controls:0,loop:1},
+    events:{
+      onReady:e=>{console.log('YT ready')},
+      onStateChange:e=>{
+        playing=e.data==YT.PlayerState.PLAYING;
+        document.getElementById('musicBtn').textContent=playing?'⏸️ إيقاف الموسيقى':'🎵 تشغيل الموسيقى';
+      }
+    }
+  });
+}
+function toggleMusic(){
+  if(!player){
+    // أنشئ الـ player فقط عند الحاجة
+    onYouTubeIframeAPIReady();
+    setTimeout(()=>player.playVideo(),500);
+    return;
+  }
+  if(playing)player.pauseVideo();else player.playVideo();
+}
+function showInfo(){
+  alert('developer website.');
+}
+
+// تحميل يوتيوب عند الحاجة فقط
+let ytLoaded=false;
+function loadYT(){
+  if(ytLoaded)return;
+  ytLoaded=true;
+  const tag=document.createElement('script');
+  tag.src='https://www.youtube.com/iframe_api';
+  document.body.appendChild(tag);
+}
+
+// تشغيل الـ scramble وتحميل الـ youtube عند أول تفاعل
+document.addEventListener('click',function loadOnce(){
+  startScramble();
+  loadYT();
+  document.removeEventListener('click',loadOnce);
+},{once:true});
+
+// تفعيل تغيير اللغة مع الـ scramble
+document.getElementById('lang').addEventListener('change', changeLangWithScramble);
+</script>
+</body>
+</html>
