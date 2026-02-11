@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Work and Public - Full Database</title>
+  <title>Work and Public - Ultra Edition</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
   <link rel="icon" href="https://www.upload.ee/image/18897750/Vito_Scaletta.jpg" type="image/png"/>
   <style>
@@ -22,29 +22,34 @@
     .content{ position:relative; z-index:2; text-align:center; padding:40px 20px; }
     h1.glitch{ font-size:2.8rem; margin-bottom:20px; text-shadow:0 0 5px #0f0; animation:glitch 2.5s infinite alternate; }
     
-    .quote{ max-width:800px; margin:20px auto; font-size:1.1rem; line-height:1.7; color:#fffc; border-right: 4px solid #0f0; padding-right: 15px; text-align: right; background: rgba(0,255,0,0.03); border-radius: 5px; }
+    .quote{ max-width:800px; margin:20px auto; font-size:1.1rem; line-height:1.7; color:#fffc; border-right: 4px solid #0f0; padding: 20px; text-align: justify; background: rgba(0,255,0,0.03); border-radius: 5px; }
     
-    .countdown-box{ font-size:1.4rem; color:#ff0; margin:20px 0; }
+    .countdown-box{ font-size:1.4rem; color:#ff0; margin:20px 0; text-shadow:0 0 5px #ff0; }
     .scramble-text{ font-size:1.8rem; margin:20px 0; color:#0f0; min-height:50px; }
     .typewriter{ font-size:1.2rem; color:#0f0; min-height:40px; margin-bottom: 20px; }
 
-    /* --- الجدول الكامل لجميع المشاريع --- */
-    .table-wrapper { width: 100%; max-width: 1000px; margin: 30px auto; overflow-x: auto; border: 1px solid #0f0; border-radius: 8px; background: rgba(0,15,0,0.9); box-shadow: 0 0 20px rgba(0,255,0,0.1); }
-    table { width: 100%; border-collapse: collapse; color: #fff; min-width: 600px; }
+    .table-wrapper { width: 100%; max-width: 1000px; margin: 30px auto; overflow-x: auto; border: 1px solid #0f0; border-radius: 8px; background: rgba(0,15,0,0.9); box-shadow: 0 0 20px rgba(0,255,0,0.2); }
+    table { width: 100%; border-collapse: collapse; color: #fff; min-width: 700px; }
     th, td { padding: 14px; border: 1px solid rgba(0,255,0,0.2); text-align: center; }
     th { background: #0f0; color: #000; font-weight: bold; }
     tr:hover { background: rgba(0,255,0,0.1); }
     
     .status-done { color: #0f0; font-weight: bold; }
-    .status-wait { color: #ff0; } /* قيد الإنشاء بالأصفر */
-    .status-later { color: #f0f; } /* قيد إنشاء لاحقاً بالبنفسجي */
+    .status-wait { color: #ff0; }
+    .status-later { color: #f0f; }
     
-    .link-btn { color: #0f0; text-decoration: none; border: 1px solid #0f0; padding: 4px 10px; border-radius: 4px; font-size: 0.8rem; transition: 0.3s; }
-    .link-btn:hover { background: #0f0; color: #000; }
+    .link-direct { color: #0ff; text-decoration: underline; font-size: 0.85rem; word-break: break-all; transition: 0.3s; }
+    .link-direct:hover { color: #fff; text-shadow: 0 0 8px #0ff; }
 
     .controls{ display:flex; gap:15px; justify-content:center; margin-top:30px; flex-wrap: wrap; }
-    .btn{ padding:10px 20px; background:#000; border:1px solid #0f0; color:#0f0; cursor:pointer; font-family:'Cairo'; border-radius: 4px; transition: 0.3s; }
-    .btn:hover{ background:#0f0; color:#000; }
+    
+    .btn{ 
+        padding:12px 25px; background:#000; border:1px solid #0f0; color:#0f0; 
+        cursor:pointer; font-family:'Cairo'; border-radius: 4px; transition: 0.2s; 
+        position: relative; overflow: hidden; font-weight: bold;
+    }
+    .btn:active { transform: scale(0.95); box-shadow: 0 0 20px #0f0; }
+
     footer{ margin-top:50px; color:#0a0; font-size:0.9rem; padding-bottom: 30px; }
     .dud { color: #060; }
   </style>
@@ -56,7 +61,7 @@
 <div class="content">
   <h1 class="glitch">مرحباً بالجميع</h1>
 
-  <div class="quote" id="quote">
+  <div class="quote">
     عندما تكون عازف الحان، وعندما تبدأ بالعزف معزوفتك أو معزوفتي، يسمعونها الناس، يجعلهم منبهرين من معزوفتك أو معزوفتي، تكون سر معرفتك وجودتك. إذا لم تعزف، لن يلتف حولك أحد، رغم أنك تعمل بالجد، وهنا لن يعزف أبداً، ويعزف معزوفة الكذب لكي ينجذب الناس، وعندما تكشف الناس أنك لست عازفاً أبداً، لن يأتي إليك أحد. تذكر ماذا قلت لك.
   </div>
 
@@ -72,17 +77,16 @@
           <th>اسم العمل</th>
           <th>الجانب</th>
           <th>الحالة</th>
-          <th>الرابط</th>
+          <th>الرابط المباشر</th>
         </tr>
       </thead>
-      <tbody id="tableBody">
-        </tbody>
+      <tbody id="tableBody"></tbody>
     </table>
   </div>
 
   <div class="controls">
     <button class="btn" id="musicBtn" onclick="toggleMusic()">🎵 تشغيل الموسيقى</button>
-    <button class="btn" onclick="toggleEffects()">✨ تشغيل/إيقاف التأثيرات</button>
+    <button class="btn" id="effectBtn" onclick="toggleEffects()">✨ التأثيرات: تعمل</button>
   </div>
 
   <footer>My dream is to succeed and travel, God willing.</footer>
@@ -93,15 +97,14 @@
 <script>
 const launchDate = new Date('2026-12-25T00:00:00');
 
-// إعادة كافة البيانات الأصلية السبعة
 const worksData = [
-  {name: "website not name", side: "يمين", status: "قيد الإنشاء", link: "-"},
-  {name: "lovers anime (edit + add)", side: "وسط", status: "مكتمل", link: "قريبا"},
-  {name: "service mail (edit)", side: "يسار", status: "مكتمل", link: "قريبا"},
-  {name: "more", side: "يمين", status: "قيد انشاء لاحقا", link: "-"},
-  {name: "plateform no public", side: "وسط", status: "قيد انشاء", link: "🔒 Private"},
-  {name: "lovers films (add + edit deep)", side: "يسار", status: "شبه مكتمل", link: "#"},
-  {name: "service other (edit after that)", side: "يمين", status: "مكتمل", link: "قريبا"}
+  {name: "website not name", side: "يمين", status: "قيد الإنشاء", url: "-"},
+  {name: "lovers anime (edit + add)", side: "وسط", status: "مكتمل", url: "قريب ينشر"},
+  {name: "service mail (edit)", side: "يسار", status: "مكتمل", url: "قريب ينشر"},
+  {name: "more", side: "يمين", status: "قيد انشاء لاحقا", url: "-"},
+  {name: "plateform no public", side: "وسط", status: "قيد انشاء", url: "🔒 Private System"},
+  {name: "lovers films (add + edit deep)", side: "يسار", status: "شبه مكتمل", url: "#"},
+  {name: "service other (edit after that)", side: "يمين", status: "مكتمل", url: "قريب ينشر}
 ];
 
 function renderTable() {
@@ -112,15 +115,14 @@ function renderTable() {
     if(w.status === 'قيد انشاء لاحقا') statusClass = 'status-later';
 
     tbody.innerHTML += `<tr>
-      <td style="color:#0f0">${w.name}</td>
+      <td style="color:#0f0; font-weight:bold;">${w.name}</td>
       <td>${w.side}</td>
       <td class="${statusClass}">${w.status}</td>
-      <td>${w.link.startsWith('http') ? `<a href="${w.link}" class="link-btn" target="_blank">Visit</a>` : w.link}</td>
+      <td>${w.url.startsWith('http') ? `<a href="${w.url}" class="link-direct" target="_blank">${w.url}</a>` : w.url}</td>
     </tr>`;
   });
 }
 
-// --- Scramble & Music ---
 let player, playing = false;
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
@@ -130,7 +132,7 @@ function onYouTubeIframeAPIReady() {
       onStateChange: e => {
         playing = (e.data == YT.PlayerState.PLAYING);
         const btn = document.getElementById('musicBtn');
-        btn.textContent = playing ? '⏸️ إيقاف الموسيقى' : '✅ تم التشغيل - إيقاف';
+        btn.textContent = playing ? '⏸️ إيقاف المعزوفة' : '✅ تم التشغيل - إيقاف';
       }
     }
   });
@@ -138,23 +140,20 @@ function onYouTubeIframeAPIReady() {
 
 function toggleMusic() {
   if (!window.YT) {
-    const tag = document.createElement('script');
-    tag.src = 'https://www.youtube.com/iframe_api';
+    const tag = document.createElement('script'); tag.src = 'https://www.youtube.com/iframe_api';
     document.body.appendChild(tag);
-    document.getElementById('musicBtn').textContent = '⏳ جاري التحميل...';
+    document.getElementById('musicBtn').textContent = '⏳ جاري الاتصال...';
     return;
   }
   if (playing) player.pauseVideo(); else player.playVideo();
 }
 
-// --- Effects ---
 function startEverything() {
   renderTable();
-  // Scramble
   const el = document.getElementById('scrambleText');
   const chars = '!@#$%^&*()_+=-';
   let counter = 0;
-  const phrases = ['مرحباً بالجميع', 'العمل قيد الإنشاء', 'سيتم الإطلاق قريباً'];
+  const phrases = ['مرحباً بالجميع', 'العمل قيد الإنشاء', 'سيتم الإطلاق'];
   
   function solve(newText) {
     const oldText = el.innerText;
@@ -177,16 +176,13 @@ function startEverything() {
     }
     update();
   }
-
   const next = () => { solve(phrases[counter]); counter = (counter + 1) % phrases.length; setTimeout(next, 4000); };
   next();
 
-  // Typewriter
-  let ti = 0; const txt = "أهلاً بالعالم، ...";
+  let ti = 0; const txt = "لم يتم نشر اي مشاريع بعد الان راوبط ستفهرس قريبا لكن بعض خدمات من روابط لن تكون متاحة شكرا";
   const type = () => { if(ti < txt.length){ document.getElementById('typewriter').innerHTML += txt.charAt(ti); ti++; setTimeout(type, 50); } };
   type();
 
-  // Countdown
   setInterval(() => {
     const diff = Math.max(0, launchDate - new Date());
     const d = Math.floor(diff/(1000*60*60*24));
@@ -205,14 +201,27 @@ document.addEventListener('click', function init() {
     d.style.animationDuration=(10+Math.random()*8)+'s'; container.appendChild(d);
   }
   if (!window.YT) {
-    const tag = document.createElement('script');
-    tag.src = 'https://www.youtube.com/iframe_api';
+    const tag = document.createElement('script'); tag.src = 'https://www.youtube.com/iframe_api';
     document.body.appendChild(tag);
   }
   document.removeEventListener('click', init);
 }, {once: true});
 
-function toggleEffects(){ const dots = document.getElementById('dots'); dots.style.display = (dots.style.display === 'none') ? 'block' : 'none'; }
+// الوظيفة المحدثة بناءً على طلبك
+function toggleEffects(){
+  const dots = document.getElementById('dots');
+  const btn = document.getElementById('effectBtn');
+  
+  if(dots.style.display === 'none'){
+    dots.style.display = 'block';
+    btn.innerHTML = '✨ التأثيرات: تعمل';
+    btn.style.boxShadow = '0 0 10px #0f0';
+  } else {
+    dots.style.display = 'none';
+    btn.innerHTML = '🌑 التأثيرات: متوقفة';
+    btn.style.boxShadow = 'none';
+  }
+}
 </script>
 </body>
 </html>
