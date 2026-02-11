@@ -3,52 +3,86 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Work and Public - Fixed Edition</title>
+  <title>Work and Public - Ultra Edition</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://www.upload.ee/image/18897750/Vito_Scaletta.jpg" type="image/png"/>
   <style>
     /* التنسيقات الأساسية */
     *{margin:0;padding:0;box-sizing:border-box}
-    body{ background:#000; color:#0f0; font-family:'Cairo',sans-serif; overflow-x:hidden; }
-    .content{ position:relative; z-index:2; text-align:center; padding:40px 20px; }
-    
-    /* تأثير النقاط */
-    #dots { position:fixed; inset:0; z-index:1; pointer-events:none; display:none; }
-    .dot { position:absolute; width:4px; height:4px; background:#0f0; border-radius:50%; box-shadow:0 0 6px #0f0; animation:float 10s infinite linear; }
-    @keyframes float { 0%{transform:translateY(110vh)} 100%{transform:translateY(-10vh)} }
+    html,body{ background:#000; color:#0f0; font-family:'Cairo',sans-serif; overflow-x:hidden; min-height:100vh; }
+    body::before{
+      content:""; position:fixed; inset:0;
+      background:radial-gradient(circle at 20% 30%,rgba(0,255,0,.08) 0%,transparent 40%),
+                radial-gradient(circle at 80% 70%,rgba(255,255,0,.06) 0%,transparent 40%);
+      z-index:0; pointer-events:none;
+    }
 
-    /* الجدول */
-    .table-wrapper { width: 100%; max-width: 1000px; margin: 30px auto; overflow-x: auto; border: 1px solid #0f0; background: rgba(0,20,0,0.9); }
-    table { width: 100%; border-collapse: collapse; color: #fff; min-width: 600px; }
-    th, td { padding: 12px; border: 1px solid rgba(0,255,0,0.2); }
-    th { background: #0f0; color: #000; }
+    /* تأثير النقاط */
+    .floating-dots{ position:fixed; inset:0; z-index:1; pointer-events:none; display:none; }
+    .dot{ position:absolute; width:4px; height:4px; background:#0f0; border-radius:50%; box-shadow:0 0 6px #0f0; animation:float 12s infinite linear; }
+    @keyframes float{ 0%{transform:translateY(110vh);opacity:0} 100%{transform:translateY(-10vh);opacity:0} }
+
+    .content{ position:relative; z-index:2; text-align:center; padding:40px 20px; }
+    h1.glitch{ font-size:2.8rem; margin-bottom:20px; text-shadow:0 0 5px #0f0; animation:glitch 2.5s infinite alternate; }
     
-    /* الأزرار */
-    .controls { display:flex; gap:10px; justify-content:center; margin-top:20px; }
-    .btn { padding:12px 20px; background:#000; border:1px solid #0f0; color:#0f0; cursor:pointer; transition: 0.2s; font-family: 'Cairo'; }
-    .btn:active { transform: scale(0.9); }
+    .quote{ max-width:800px; margin:20px auto; font-size:1.1rem; line-height:1.7; color:#fffc; border-right: 4px solid #0f0; padding: 20px; text-align: justify; background: rgba(0,255,0,0.03); border-radius: 5px; }
     
-    .status-done { color: #0f0; }
+    .countdown-box{ font-size:1.4rem; color:#ff0; margin:20px 0; text-shadow:0 0 5px #ff0; }
+    .scramble-text{ font-size:1.8rem; margin:20px 0; color:#0f0; min-height:50px; }
+    .typewriter{ font-size:1.1rem; color:#0f0; min-height:40px; margin-bottom: 20px; opacity: 0.8; }
+
+    /* الجدول المطور */
+    .table-wrapper { width: 100%; max-width: 1000px; margin: 30px auto; overflow-x: auto; border: 1px solid #0f0; border-radius: 8px; background: rgba(0,15,0,0.9); box-shadow: 0 0 20px rgba(0,255,0,0.2); }
+    table { width: 100%; border-collapse: collapse; color: #fff; min-width: 700px; }
+    th, td { padding: 14px; border: 1px solid rgba(0,255,0,0.2); text-align: center; }
+    th { background: #0f0; color: #000; font-weight: bold; }
+    tr:hover { background: rgba(0,255,0,0.1); }
+    
+    .status-done { color: #0f0; font-weight: bold; }
     .status-wait { color: #ff0; }
-    .link-direct { color: #0ff; font-size: 0.8rem; }
+    .status-later { color: #f0f; }
+    
+    .link-direct { color: #0ff; text-decoration: underline; font-size: 0.85rem; word-break: break-all; transition: 0.3s; }
+    .link-direct:hover { color: #fff; text-shadow: 0 0 8px #0ff; }
+
+    .controls{ display:flex; gap:15px; justify-content:center; margin-top:30px; flex-wrap: wrap; }
+    
+    .btn{ 
+        padding:12px 25px; background:#000; border:1px solid #0f0; color:#0f0; 
+        cursor:pointer; font-family:'Cairo'; border-radius: 4px; transition: 0.2s; 
+        position: relative; overflow: hidden; font-weight: bold;
+    }
+    .btn:active { transform: scale(0.95); box-shadow: 0 0 20px #0f0; }
+    .btn:hover { background: rgba(0, 255, 0, 0.1); }
+
+    footer{ margin-top:50px; color:#0a0; font-size:0.9rem; padding-bottom: 30px; }
+    .dud { color: #060; }
   </style>
 </head>
 <body>
 
-<div id="dots"></div>
+<div class="floating-dots" id="dots"></div>
 
 <div class="content">
-  <h1 style="font-size: 2.5rem; text-shadow: 0 0 10px #0f0;">مرحباً بالجميع</h1>
+  <h1 class="glitch">مرحباً بالجميع</h1>
+
+  <div class="quote">
+    عندما تكون عازف الحان، وعندما تبدأ بالعزف معزوفتك أو معزوفتي، يسمعونها الناس، يجعلهم منبهرين من معزوفتك أو معزوفتي، تكون سر معرفتك وجودتك. إذا لم تعزف، لن يلتف حولك أحد، رغم أنك تعمل بالجد، وهنا لن يعزف أبداً، ويعزف معزوفة الكذب لكي ينجذب الناس، وعندما تكشف الناس أنك لست عازفاً أبداً، لن يأتي إليك أحد. تذكر ماذا قلت لك.
+  </div>
+
+  <div class="countdown-box">العدّاد التنازلي للإطلاق: <span id="countdown">--:--:--</span></div>
   
-  <p id="typewriter" style="margin: 20px 0; min-height: 1.5em;"></p>
+  <div class="scramble-text" id="scrambleText"></div>
+  <div id="typewriter" class="typewriter"></div>
 
   <div class="table-wrapper">
     <table>
       <thead>
         <tr>
-          <th>العمل</th>
+          <th>اسم العمل</th>
           <th>الجانب</th>
           <th>الحالة</th>
-          <th>الرابط</th>
+          <th>الرابط المباشر</th>
         </tr>
       </thead>
       <tbody id="tableBody"></tbody>
@@ -56,107 +90,158 @@
   </div>
 
   <div class="controls">
-    <button class="btn" id="musicBtn" onclick="toggleMusic()">🎵 تحميل الموسيقى</button>
-    <button class="btn" id="effectBtn" onclick="toggleEffects()">✨ التأثيرات: متوقفة</button>
+    <button class="btn" id="musicBtn" onclick="toggleMusic()">🎵 تشغيل الموسيقى</button>
+    <button class="btn" id="effectBtn" onclick="toggleEffects()">✨ التأثيرات: تعمل</button>
   </div>
+
+  <footer>My dream is to succeed and travel, God willing.</footer>
 </div>
 
-<div id="player"></div> <script>
-// 1. البيانات
+<div id="player" style="display:none;"></div>
+
+<script>
+const launchDate = new Date('2026-12-25T00:00:00');
+
+// كافة البيانات مع الروابط المباشرة (كما طلبت)
 const worksData = [
-  {n: "website not name", s: "يمين", st: "قيد الإنشاء", u: "-"},
-  {n: "lovers anime", s: "وسط", st: "مكتمل", u: "https://lovers-anime.com"},
-  {n: "service mail", s: "يسار", st: "مكتمل", u: "https://mail-service.com"},
-  {n: "more", s: "يمين", st: "قيد إنشاء لاحقاً", u: "-"},
-  {n: "plateform", s: "وسط", st: "قيد إنشاء", u: "🔒 Private"}
+  {name: "website not name", side: "يمين", status: "قيد الإنشاء", url: "-"},
+  {name: "lovers anime (edit + add)", side: "وسط", status: "مكتمل", url: "https://lovers-anime.example.com"},
+  {name: "service mail (edit)", side: "يسار", status: "مكتمل", url: "https://mail-service.example.com"},
+  {name: "more", side: "يمين", status: "قيد انشاء لاحقا", url: "-"},
+  {name: "plateform no public", side: "وسط", status: "قيد انشاء", url: "🔒 Private System"},
+  {name: "lovers films (add + edit deep)", side: "يسار", status: "شبه مكتمل", url: "#"},
+  {name: "service other (edit after that)", side: "يمين", status: "مكتمل", url: "https://other-service.example.com"}
 ];
 
-// 2. تعبئة الجدول
-const tbody = document.getElementById('tableBody');
-worksData.forEach(w => {
-  tbody.innerHTML += `<tr>
-    <td>${w.n}</td>
-    <td>${w.s}</td>
-    <td class="${w.st === 'مكتمل' ? 'status-done' : 'status-wait'}">${w.st}</td>
-    <td><a class="link-direct" href="${w.u}" target="_blank">${w.u}</a></td>
-  </tr>`;
-});
+function renderTable() {
+  const tbody = document.getElementById('tableBody');
+  tbody.innerHTML = ""; // مسح الجدول قبل التعبئة
+  worksData.forEach(w => {
+    let statusClass = 'status-wait';
+    if(w.status === 'مكتمل') statusClass = 'status-done';
+    if(w.status === 'قيد انشاء لاحقا') statusClass = 'status-later';
 
-// 3. التحكم بالموسيقى (طريقة آمنة)
-let player;
-let isPlaying = false;
-
-function toggleMusic() {
-  const btn = document.getElementById('musicBtn');
-  
-  // إذا لم يتم تحميل API اليوتيوب بعد
-  if (!window.YT) {
-    btn.innerText = "⏳ جاري الاتصال...";
-    const tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    document.body.appendChild(tag);
-    return;
-  }
-
-  if (!player) {
-    player = new YT.Player('player', {
-      height: '0', width: '0', videoId: 'I-AlgFRP5CM',
-      playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': 'I-AlgFRP5CM' },
-      events: {
-        'onReady': (e) => { 
-            e.target.playVideo(); 
-            isPlaying = true;
-            btn.innerText = "⏸️ إيقاف المعزوفة";
-        },
-        'onStateChange': (e) => {
-            if(e.data == 1) { isPlaying = true; btn.innerText = "⏸️ إيقاف المعزوفة"; }
-            else { isPlaying = false; btn.innerText = "▶️ تشغيل المعزوفة"; }
-        }
-      }
-    });
-  } else {
-    if (isPlaying) { player.pauseVideo(); } else { player.playVideo(); }
-  }
+    tbody.innerHTML += `<tr>
+      <td style="color:#0f0; font-weight:bold;">${w.name}</td>
+      <td>${w.side}</td>
+      <td class="${statusClass}">${w.status}</td>
+      <td>${w.url.startsWith('http') ? `<a href="${w.url}" class="link-direct" target="_blank">${w.url}</a>` : w.url}</td>
+    </tr>`;
+  });
 }
 
-// 4. التحكم بالتأثيرات (بناءً على طلبك الأخير)
-function toggleEffects() {
-  const dotsContainer = document.getElementById('dots');
-  const btn = document.getElementById('effectBtn');
-
-  if (dotsContainer.style.display === 'none' || dotsContainer.style.display === '') {
-    // تشغيل
-    if (dotsContainer.innerHTML === "") { // إنشاء النقاط لأول مرة فقط
-      for (let i = 0; i < 20; i++) {
-        const d = document.createElement('div');
-        d.className = 'dot';
-        d.style.left = Math.random() * 100 + '%';
-        d.style.animationDelay = Math.random() * 5 + 's';
-        dotsContainer.appendChild(d);
+// --- مشغل الموسيقى ---
+let player, playing = false;
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('player', {
+    height: '0', width: '0', videoId: 'I-AlgFRP5CM',
+    playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: 'I-AlgFRP5CM' },
+    events: {
+      onStateChange: e => {
+        playing = (e.data == YT.PlayerState.PLAYING);
+        const btn = document.getElementById('musicBtn');
+        btn.textContent = playing ? '⏸️ إيقاف المعزوفة' : '✅ تم التشغيل - إيقاف';
       }
     }
-    dotsContainer.style.display = 'block';
-    btn.innerText = "✨ التأثيرات: تعمل";
-    btn.style.boxShadow = "0 0 10px #0f0";
+  });
+}
+
+function toggleMusic() {
+  if (!window.YT) {
+    const tag = document.createElement('script'); tag.src = 'https://www.youtube.com/iframe_api';
+    document.body.appendChild(tag);
+    document.getElementById('musicBtn').textContent = '⏳ جاري الاتصال...';
+    return;
+  }
+  if (playing) player.pauseVideo(); else player.playVideo();
+}
+
+// --- التأثيرات والوظيفة المحدثة بناءً على طلبك الأخير ---
+function toggleEffects(){
+  const dots = document.getElementById('dots');
+  const btn = document.getElementById('effectBtn');
+  
+  if (dots.style.display === 'none' || dots.style.display === '') {
+    dots.style.display = 'block';
+    btn.innerHTML = '✨ التأثيرات: تعمل';
+    btn.style.boxShadow = '0 0 10px #0f0';
   } else {
-    // إيقاف
-    dotsContainer.style.display = 'none';
-    btn.innerText = "🌑 التأثيرات: متوقفة";
-    btn.style.boxShadow = "none";
+    dots.style.display = 'none';
+    btn.innerHTML = '🌑 التأثيرات: متوقفة';
+    btn.style.boxShadow = 'none';
   }
 }
 
-// 5. تأثير الكتابة
-let i = 0;
-const text = "لم يتم نشر اي مشاريع بعد الان.. تذكر المقولة دائماً.";
-function type() {
-  if (i < text.length) {
-    document.getElementById("typewriter").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(type, 50);
+function startEverything() {
+  renderTable();
+  
+  // تأثير Scramble
+  const el = document.getElementById('scrambleText');
+  const chars = '!@#$%^&*()_+=-';
+  let counter = 0;
+  const phrases = ['مرحباً بالجميع', 'العمل قيد الإنشاء', 'سيتم الإطلاق قريباً'];
+  
+  function solve(newText) {
+    const oldText = el.innerText;
+    const length = Math.max(oldText.length, newText.length);
+    let frame = 0;
+    const queue = [];
+    for (let i = 0; i < length; i++) {
+      queue.push({ from: oldText[i] || '', to: newText[i] || '', start: Math.floor(Math.random()*40), end: Math.floor(Math.random()*40) + 40 });
+    }
+    function update() {
+      let output = ''; let complete = 0;
+      for (let i = 0; i < queue.length; i++) {
+        let { from, to, start, end, char } = queue[i];
+        if (frame >= end) { complete++; output += to; }
+        else if (frame >= start) { if (!char || Math.random() < 0.28) { char = chars[Math.floor(Math.random()*chars.length)]; queue[i].char = char; } output += `<span class="dud">${char}</span>`; }
+        else { output += from; }
+      }
+      el.innerHTML = output;
+      if (complete !== queue.length) { requestAnimationFrame(update); frame++; }
+    }
+    update();
   }
+  const next = () => { solve(phrases[counter]); counter = (counter + 1) % phrases.length; setTimeout(next, 4000); };
+  next();
+
+  // Typewriter المحدث
+  let ti = 0; 
+  const txt = "لم يتم نشر اي مشاريع بعد الان.. الروابط ستفهرس قريباً.. تذكر المقولة دائماً.";
+  function type() {
+    if(ti < txt.length){
+      document.getElementById('typewriter').innerHTML += txt.charAt(ti);
+      ti++;
+      setTimeout(type, 50);
+    }
+  }
+  type();
+
+  // Countdown
+  setInterval(() => {
+    const diff = Math.max(0, launchDate - new Date());
+    const d = Math.floor(diff/(1000*60*60*24));
+    const h = String(Math.floor((diff%(1000*60*60*24))/(1000*60*60))).padStart(2,'0');
+    const m = String(Math.floor((diff%(1000*60*60))/(1000*60))).padStart(2,'0');
+    const s = String(Math.floor((diff%(1000*60))/1000)).padStart(2,'0');
+    document.getElementById('countdown').textContent = `${d} يوم ${h}:${m}:${s}`;
+  }, 1000);
 }
-window.onload = type;
+
+// التفعيل عند أول نقرة (متطلبات المتصفحات للموسيقى)
+document.addEventListener('click', function init() {
+  startEverything();
+  const container = document.getElementById('dots');
+  container.style.display = 'block';
+  for(let i=0; i<15; i++){
+    const d = document.createElement('div');
+    d.className = 'dot';
+    d.style.left = Math.random()*100 + '%';
+    d.style.animationDuration = (10 + Math.random()*8) + 's';
+    container.appendChild(d);
+  }
+  document.removeEventListener('click', init);
+}, {once: true});
 </script>
 </body>
 </html>
