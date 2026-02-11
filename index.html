@@ -3,580 +3,216 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>work and public</title>
+  <title>Work and Public - Full Database</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
   <link rel="icon" href="https://www.upload.ee/image/18897750/Vito_Scaletta.jpg" type="image/png"/>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
-    html,body{
-      background:#000;
-      color:#0f0;
-      font-family:'Cairo',sans-serif;
-      overflow-x:hidden;
-      min-height:100vh;
-    }
+    html,body{ background:#000; color:#0f0; font-family:'Cairo',sans-serif; overflow-x:hidden; min-height:100vh; }
     body::before{
-      content:"";
-      position:fixed;
-      inset:0;
+      content:""; position:fixed; inset:0;
       background:radial-gradient(circle at 20% 30%,rgba(0,255,0,.08) 0%,transparent 40%),
                 radial-gradient(circle at 80% 70%,rgba(255,255,0,.06) 0%,transparent 40%);
-      z-index:0;
-      pointer-events:none;
+      z-index:0; pointer-events:none;
     }
-    .floating-dots{
-      position:fixed;
-      inset:0;
-      z-index:1;
-      pointer-events:none;
-      display:none;
-    }
-    .dot{
-      position:absolute;
-      width:4px;height:4px;
-      background:#0f0;
-      border-radius:50%;
-      box-shadow:0 0 6px #0f0;
-      animation:float 12s infinite linear;
-    }
-    @keyframes float{
-      0%{transform:translateY(110vh) scale(1);opacity:0}
-      10%{opacity:1}
-      90%{opacity:1}
-      100%{transform:translateY(-10vh) scale(1.8);opacity:0}
-    }
-    .content{
-      position:relative;
-      z-index:2;
-      text-align:center;
-      padding:40px 20px 80px;
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-    }
-    h1.glitch{
-      font-size:2.8rem;
-      margin-bottom:20px;
-      text-shadow:0 0 5px #0f0,0 0 10px #0f0;
-      animation:glitch 2.5s infinite alternate;
-    }
-    @keyframes glitch{
-      0%{text-shadow:0 0 5px #0f0,0 0 10px #0f0}
-      25%{text-shadow:0 0 5px #ff0,0 0 10px #ff0}
-      50%{text-shadow:0 0 5px #0ff,0 0 10px #0ff}
-      75%{text-shadow:0 0 5px #f0f,0 0 10px #f0f}
-      100%{text-shadow:0 0 5px #0f0,0 0 10px #0f0}
-    }
-    .quote{
-      max-width:700px;
-      margin:20px auto 30px;
-      font-size:1.3rem;
-      line-height:1.7;
-      color:#fffc;
-      text-shadow:0 0 3px #fff3;
-    }
-    .lang-switch{
-      position:fixed;
-      top:15px;right:15px;
-      background:#0008;
-      border:1px solid #0f0;
-      border-radius:5px;
-      padding:5px;
-      z-index:10;
-    }
-    select{
-      background:#000;
-      color:#0f0;
-      border:none;
-      padding:6px 10px;
-      font-family:'Cairo',sans-serif;
-    }
-    .countdown-box{
-      margin:20px 0 30px;
-      font-size:1.4rem;
-      color:#ff0;
-      text-shadow:0 0 6px #ff0;
-    }
-    .scramble-text{
-      font-size:1.8rem;
-      margin:20px 0;
-      min-height:50px;
-      color:#0f0;
-      text-shadow:0 0 5px #0f0;
-    }
-    .dud { 
-      color: #060; 
-    }
-    /* تأثير الكتابة التدريجي */
-    .typewriter{
-      font-size:1.2rem;
-      margin-top:20px;
-      color:#0f0;
-      min-height:80px;
-      text-align:center;
-    }
-    .blink {
-      animation: blink 1s infinite;
-    }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-    .works-container{
-      width:95%;
-      max-width:1000px;
-      display:grid;
-      grid-template-columns:repeat(auto-fit,280px);
-      gap:20px;
-      justify-content:center;
-      margin-bottom:40px;
-    }
-    .work-card{
-      background:#0f011a;
-      border:1px solid #0f0;
-      border-radius:8px;
-      padding:15px;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-      position:relative;
-    }
-    .work-card.completed{
-      background:#003300;
-      border-color:#0f0;
-    }
-    .work-name{
-      color:#fff;
-      font-size:1.1rem;
-    }
-    .work-side{
-      position:absolute;
-      top:5px;left:8px;
-      font-size:.7rem;
-      color:#0ff;
-      background:#0006;
-      padding:2px 6px;
-      border-radius:3px;
-    }
-    .work-status{
-      color:#0ff;
-      font-weight:bold;
-    }
-    .work-card.completed .work-status{
-      color:#0f0;
-    }
-    .screenshots{
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-      gap:15px;
-      margin-top:25px;
-    }
-    .shot{
-      width:140px;
-      height:80px;
-      background:#000;
-      border:1px solid #0f0;
-      border-radius:4px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:1rem;
-      color:#0f0;
-      box-shadow:0 0 6px #0f0;
-      opacity:0;
-      transform:scale(.9);
-      animation:fadeIn .6s forwards;
-    }
-    @keyframes fadeIn{to{opacity:1;transform:scale(1)}}
-    .launch-msg{
-      margin-top:30px;
-      font-size:1.3rem;
-      color:#f0f;
-      text-shadow:0 0 6px #f0f;
-    }
-    .controls{
-      display:flex;
-      gap:15px;
-      flex-wrap:wrap;
-      justify-content:center;
-      margin-top:30px;
-    }
-    .btn{
-      padding:10px 20px;
-      background:#000;
-      border:1px solid #0f0;
-      color:#0f0;
-      border-radius:4px;
-      cursor:pointer;
-      font-family:'Cairo',sans-serif;
-      transition:.3s;
-    }
-    .btn:hover{
-      background:#0f0;
-      color:#000;
-      box-shadow:0 0 10px #0f0;
-    }
-    footer{
-      margin-top:60px;
-      font-size:.9rem;
-      color:#0a0;
-    }
-    @media(max-width:600px){
-      h1.glitch{font-size:2.2rem}
-      .quote{font-size:1.1rem}
-    }
+    .floating-dots{ position:fixed; inset:0; z-index:1; pointer-events:none; display:none; }
+    .dot{ position:absolute; width:4px; height:4px; background:#0f0; border-radius:50%; box-shadow:0 0 6px #0f0; animation:float 12s infinite linear; }
+    @keyframes float{ 0%{transform:translateY(110vh);opacity:0} 100%{transform:translateY(-10vh);opacity:0} }
+
+    .content{ position:relative; z-index:2; text-align:center; padding:40px 20px; }
+    h1.glitch{ font-size:2.8rem; margin-bottom:20px; text-shadow:0 0 5px #0f0; animation:glitch 2.5s infinite alternate; }
+    
+    .quote{ max-width:800px; margin:20px auto; font-size:1.1rem; line-height:1.7; color:#fffc; border-right: 4px solid #0f0; padding-right: 15px; text-align: right; background: rgba(0,255,0,0.03); border-radius: 5px; }
+    
+    .countdown-box{ font-size:1.4rem; color:#ff0; margin:20px 0; }
+    .scramble-text{ font-size:1.8rem; margin:20px 0; color:#0f0; min-height:50px; }
+    .typewriter{ font-size:1.2rem; color:#0f0; min-height:40px; margin-bottom: 20px; }
+
+    /* --- الجدول الكامل لجميع المشاريع --- */
+    .table-wrapper { width: 100%; max-width: 1000px; margin: 30px auto; overflow-x: auto; border: 1px solid #0f0; border-radius: 8px; background: rgba(0,15,0,0.9); box-shadow: 0 0 20px rgba(0,255,0,0.1); }
+    table { width: 100%; border-collapse: collapse; color: #fff; min-width: 600px; }
+    th, td { padding: 14px; border: 1px solid rgba(0,255,0,0.2); text-align: center; }
+    th { background: #0f0; color: #000; font-weight: bold; }
+    tr:hover { background: rgba(0,255,0,0.1); }
+    
+    .status-done { color: #0f0; font-weight: bold; }
+    .status-wait { color: #ff0; } /* قيد الإنشاء بالأصفر */
+    .status-later { color: #f0f; } /* قيد إنشاء لاحقاً بالبنفسجي */
+    
+    .link-btn { color: #0f0; text-decoration: none; border: 1px solid #0f0; padding: 4px 10px; border-radius: 4px; font-size: 0.8rem; transition: 0.3s; }
+    .link-btn:hover { background: #0f0; color: #000; }
+
+    .controls{ display:flex; gap:15px; justify-content:center; margin-top:30px; flex-wrap: wrap; }
+    .btn{ padding:10px 20px; background:#000; border:1px solid #0f0; color:#0f0; cursor:pointer; font-family:'Cairo'; border-radius: 4px; transition: 0.3s; }
+    .btn:hover{ background:#0f0; color:#000; }
+    footer{ margin-top:50px; color:#0a0; font-size:0.9rem; padding-bottom: 30px; }
+    .dud { color: #060; }
   </style>
 </head>
 <body>
 
-<!-- النقاط العائمة -->
 <div class="floating-dots" id="dots"></div>
 
-<!-- تبديل اللغة -->
-<div class="lang-switch">
-  <select id="lang">
-    <option value="ar">العربية</option>
-    <option value="en">English</option>
-  </select>
-</div>
-
-<!-- المحتوى -->
 <div class="content">
-  <h1 class="glitch" id="title">مرحباً بالجميع</h1>
+  <h1 class="glitch">مرحباً بالجميع</h1>
 
   <div class="quote" id="quote">
     عندما تكون عازف الحان، وعندما تبدأ بالعزف معزوفتك أو معزوفتي، يسمعونها الناس، يجعلهم منبهرين من معزوفتك أو معزوفتي، تكون سر معرفتك وجودتك. إذا لم تعزف، لن يلتف حولك أحد، رغم أنك تعمل بالجد، وهنا لن يعزف أبداً، ويعزف معزوفة الكذب لكي ينجذب الناس، وعندما تكشف الناس أنك لست عازفاً أبداً، لن يأتي إليك أحد. تذكر ماذا قلت لك.
   </div>
 
-  <!-- العداد التنازلي العام -->
-  <div class="countdown-box">
-    العدّاد التنازلي للإطلاق: <span id="countdown">--:--:--</span>
-  </div>
-
-  <!-- تأثير الـ TextScramble -->
+  <div class="countdown-box">العدّاد التنازلي للإطلاق: <span id="countdown">--:--:--</span></div>
+  
   <div class="scramble-text" id="scrambleText"></div>
-
-  <!-- تأثير الكتابة التدريجي -->
   <div id="typewriter" class="typewriter"></div>
 
-  <!-- عرض الأعمال -->
-  <div class="works-container" id="worksContainer"></div>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>اسم العمل</th>
+          <th>الجانب</th>
+          <th>الحالة</th>
+          <th>الرابط</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        </tbody>
+    </table>
+  </div>
 
-  <!-- لقطات الأعمال -->
-  <div class="screenshots" id="shots"></div>
-
-  <!-- رسالة الإطلاق -->
-  <div class="launch-msg" id="launchMsg">بعد إكمال الأعمال، سيتم إطلاقها حسب رقم العمل بالترتيب ❤️😊</div>
-
-  <!-- أزرار التحكم -->
   <div class="controls">
-    <button class="btn" id="musicBtn" onclick="toggleMusic()">🎵 تشغيل / إيقاف الموسيقى</button>
-    <button class="btn" onclick="showInfo()">ℹ️ معلومات</button>
+    <button class="btn" id="musicBtn" onclick="toggleMusic()">🎵 تشغيل الموسيقى</button>
     <button class="btn" onclick="toggleEffects()">✨ تشغيل/إيقاف التأثيرات</button>
   </div>
 
   <footer>My dream is to succeed and travel, God willing.</footer>
 </div>
 
-<!-- يوتيوب خفي -->
 <div id="player" style="display:none;"></div>
 
 <script>
-// ========== التحكم بالتاريخ والوقت ==========
-const launchDate = new Date('2026-12-25T00:00:00'); // عدّل التاريخ والساعة هنا
-// ==========================================
+const launchDate = new Date('2026-12-25T00:00:00');
 
-// ========== أضف أو عدّل أعمالك هنا ==========
+// إعادة كافة البيانات الأصلية السبعة
 const worksData = [
-  {name: "website not name", status: "قيد الإنشاء", side: "يمين"},
-  {name: "lovers anime (edit + add)", status: "مكتمل", side: "وسط"},
-  {name: "service mail (edit)", status: "مكتمل", side: "يسار"},
-  {name: "more", status: "قيد انشاء لاحقا", side: "يمين"},
-  {name: "plateform no public", status: "قيد انشاء", side: "وسط"},
-  {name: "lovers films (add + edit deep)", status: "شبه مكتمل", side: "يسار"},
-  {name: "service other (edit after that)", status: "مكتمل", side: "يمين"},
-  // زيد أو عدّل أي عدد من الأعمال هنا...
+  {name: "website not name", side: "يمين", status: "قيد الإنشاء", link: "-"},
+  {name: "lovers anime (edit + add)", side: "وسط", status: "مكتمل", link: "https://example.com"},
+  {name: "service mail (edit)", side: "يسار", status: "مكتمل", link: "https://example.com"},
+  {name: "more", side: "يمين", status: "قيد انشاء لاحقا", link: "-"},
+  {name: "plateform no public", side: "وسط", status: "قيد انشاء", link: "🔒 Private"},
+  {name: "lovers films (add + edit deep)", side: "يسار", status: "شبه مكتمل", link: "#"},
+  {name: "service other (edit after that)", side: "يمين", status: "مكتمل", link: "https://example.com"}
 ];
-// ==========================================
 
-// ========== TextScramble مع دعم اللغة ==========
-const scramblePhrases = {
-  ar: ['مرحباً بالجميع', 'العمل قيد الإنشاء', 'سيتم الإطلاق قريباً'],
-  en: ['Welcome Everyone', 'Work in Progress', 'Launching Soon']
-};
+function renderTable() {
+  const tbody = document.getElementById('tableBody');
+  worksData.forEach(w => {
+    let statusClass = 'status-wait';
+    if(w.status === 'مكتمل') statusClass = 'status-done';
+    if(w.status === 'قيد انشاء لاحقا') statusClass = 'status-later';
 
-let currentLang = 'ar';
-let scrambleInterval;
-
-class TextScramble {
-  constructor(el) {
-    this.el = el;
-    this.chars = '!@#$%^&*()_+=-{}[]|:;"<>,.?/~';
-    this.update = this.update.bind(this);
-  }
-  
-  setText(newText) {
-    const oldText = this.el.innerText;
-    const length = Math.max(oldText.length, newText.length);
-    const promise = new Promise(resolve => this.resolve = resolve);
-    this.queue = [];
-    
-    for (let i = 0; i < length; i++) {
-      const from = oldText[i] || '';
-      const to = newText[i] || '';
-      const start = Math.floor(Math.random() * 40);
-      const end = start + Math.floor(Math.random() * 40);
-      this.queue.push({ from, to, start, end });
-    }
-    
-    cancelAnimationFrame(this.frameRequest);
-    this.frame = 0;
-    this.update();
-    return promise;
-  }
-  
-  update() {
-    let output = '';
-    let complete = 0;
-    
-    for (let i = 0, n = this.queue.length; i < n; i++) {
-      let { from, to, start, end, char } = this.queue[i];
-      
-      if (this.frame >= end) {
-        complete++;
-        output += to;
-      } else if (this.frame >= start) {
-        if (!char || Math.random() < 0.28) {
-          char = this.randomChar();
-          this.queue[i].char = char;
-        }
-        output += `<span class="dud">${char}</span>`;
-      } else {
-        output += from;
-      }
-    }
-    
-    this.el.innerHTML = output;
-    
-    if (complete === this.queue.length) {
-      this.resolve();
-    } else {
-      this.frameRequest = requestAnimationFrame(this.update);
-      this.frame++;
-    }
-  }
-  
-  randomChar() {
-    return this.chars[Math.floor(Math.random() * this.chars.length)];
-  }
-}
-
-function startScramble() {
-  const el = document.getElementById('scrambleText');
-  if (!el) return;
-  const phrases = scramblePhrases[currentLang];
-  const fx = new TextScramble(el);
-  let counter = 0;
-
-  function next() {
-    fx.setText(phrases[counter]).then(() => {
-      setTimeout(next, 3000);
-    });
-    counter = (counter + 1) % phrases.length;
-  }
-
-  next();
-}
-
-// دمج تأثير scramble مع تغيير اللغة
-function changeLangWithScramble() {
-  const lang = document.getElementById('lang').value;
-  currentLang = lang;
-  
-  // غيّر العبارة فوراً بـ scramble
-  const el = document.getElementById('scrambleText');
-  const fx = new TextScramble(el);
-  const newPhrase = scramblePhrases[lang][0];
-  fx.setText(newPhrase);
-  
-  // عدّل باقي النصوص
-  const t = translations[lang];
-  document.getElementById('title').textContent = t.title;
-  document.getElementById('quote').textContent = t.quote;
-  document.getElementById('launchMsg').textContent = t.launchMsg;
-  
-  // أعد تشغيل الكتابة التدريجي باللغة الجديدة
-  resetTypewriter();
-}
-
-// تفعيل تغيير اللغة مع الـ scramble
-document.getElementById('lang').addEventListener('change', changeLangWithScramble);
-// ==========================================
-
-// ========== تأثير الكتابة التدريجي ==========
-const typewriterText = {
-  ar: "أهلاً بالعالم، هذا النص يُكتب الآن حرفاً حرفاً...",
-  en: "Hello world, this text is being written letter by letter..."
-};
-
-let typeIndex = 0;
-let typeTarget = document.getElementById('typewriter');
-
-function startTypewriter() {
-  const txt = typewriterText[currentLang];
-  if (typeIndex < txt.length) {
-    typeTarget.innerHTML = txt.substring(0, typeIndex + 1) + '<span class="blink">|</span>';
-    typeIndex++;
-    setTimeout(startTypewriter, 60);
-  } else {
-    typeTarget.innerHTML = txt + '<span class="blink">|</span>';
-  }
-}
-
-function resetTypewriter() {
-    typeIndex = 0;
-    typeTarget.innerHTML = '';
-    startTypewriter();
-}
-// ==========================================
-
-// إنشاء النقاط العائمة (15 نقطة فقط)
-let dotsCreated = false;
-function createDots(){
-  if(dotsCreated) return;
-  dotsCreated = true;
-  const container=document.getElementById('dots');
-  container.style.display = 'block';
-  for(let i=0;i<15;i++){
-    const d=document.createElement('div');
-    d.className='dot';
-    d.style.left=Math.random()*100+'%';
-    d.style.animationDelay=Math.random()*12+'s';
-    d.style.animationDuration=(10+Math.random()*8)+'s';
-    container.appendChild(d);
-  }
-}
-
-// إيقاف التأثيرات
-function toggleEffects(){
-  const dots = document.getElementById('dots');
-  if(dots.style.display === 'block'){
-    dots.style.display = 'none';
-    if(window.requestIdleCallback) window.requestIdleCallback(()=>cancelAnimationFrame(0));
-  } else {
-    createDots();
-  }
-}
-
-// عداد تنازلي خفيف (requestAnimationFrame)
-let rafId;
-function startCountdown(){
-  function frame(){
-    const now=new Date();
-    const diff=Math.max(0,launchDate-now);
-    const d=Math.floor(diff/(1000*60*60*24));
-    const h=String(Math.floor((diff%(1000*60*60*24))/(1000*60*60))).padStart(2,'0');
-    const m=String(Math.floor((diff%(1000*60*60))/(1000*60))).padStart(2,'0');
-    const s=String(Math.floor((diff%(1000*60))/1000)).padStart(2,'0');
-    document.getElementById('countdown').textContent=`${d} يوم ${h}:${m}:${s}`;
-    rafId = requestAnimationFrame(frame);
-  }
-  frame();
-}
-startCountdown();
-
-// عرض الأعمال
-function renderWorks(){
-  const container=document.getElementById('worksContainer');
-  container.innerHTML='';
-  worksData.forEach(work=>{
-    const card=document.createElement('div');
-    card.className=`work-card ${work.status==='مكتمل'?'completed':''}`;
-    card.innerHTML=`
-      <span class="work-side">${work.side}</span>
-      <div class="work-name">${work.name}</div>
-      <div class="work-status">${work.status}</div>
-    `;
-    container.appendChild(card);
-    if(work.status==='مكتمل')addScreenshot(work.name);
+    tbody.innerHTML += `<tr>
+      <td style="color:#0f0">${w.name}</td>
+      <td>${w.side}</td>
+      <td class="${statusClass}">${w.status}</td>
+      <td>${w.link.startsWith('http') ? `<a href="${w.link}" class="link-btn" target="_blank">Visit</a>` : w.link}</td>
+    </tr>`;
   });
 }
-renderWorks();
 
-// إضافة لقطة شاشة
-function addScreenshot(text){
-  const box=document.getElementById('shots');
-  const shot=document.createElement('div');
-  shot.className='shot';
-  shot.textContent=text;
-  shot.style.animationDelay='0s';
-  box.appendChild(shot);
-}
-
-// ترجمات
-const translations={
-  ar:{
-    title:'مرحباً بالجميع',
-    quote:'عندما تكون عازف الحان، وعندما تبدأ بالعزف معزوفتك أو معزوفتي، يسمعونها الناس، يجعلهم منبهرين من معزوفتك أو معزوفتي، تكون سر معرفتك وجودتك. إذا لم تعزف، لن يلتف حولك أحد، رغم أنك تعمل بالجد، وهنا لن يعزف أبداً، ويعزف معزوفة الكذب لكي ينجذب الناس، وعندما تكشف الناس أنك لست عازفاً أبداً، لن يأتي إليك أحد. تذكر ماذا قلت لك.',
-    launchMsg:'بعد إكمال الأعمال، سيتم إطلاقها حسب رقم العمل بالترتيب ❤️😊'
-  },
-  en:{
-    title:'Welcome Everyone',
-    quote:'When you are a melody player, and when you start playing your or my melody, people listen to it, making them amazed by your or my melody, it becomes the secret of your knowledge and quality. If you do not play, no one will gather around you, even though you work hard, and here he will never play, but plays the melody of lies to attract people, and when people discover that you are not a player at all, no one will come to you. Remember what I told you.',
-    launchMsg:'After completing the works, they will be launched according to the work number in order ❤️😊'
-  }
-};
-
-// موسيقى يوتيوب (تُشغّل فقط عند الضغط)
-let player,playing=false;
-function onYouTubeIframeAPIReady(){
-  player=new YT.Player('player',{
-    height:'0',width:'0',videoId:'I-AlgFRP5CM',
-    playerVars:{autoplay:0,controls:0,loop:1},
-    events:{
-      onReady:e=>{console.log('YT ready')},
-      onStateChange:e=>{
-        playing=e.data==YT.PlayerState.PLAYING;
-        document.getElementById('musicBtn').textContent=playing?'⏸️ إيقاف الموسيقى':'🎵 تشغيل الموسيقى';
+// --- Scramble & Music ---
+let player, playing = false;
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('player', {
+    height: '0', width: '0', videoId: 'I-AlgFRP5CM',
+    playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: 'I-AlgFRP5CM' },
+    events: {
+      onStateChange: e => {
+        playing = (e.data == YT.PlayerState.PLAYING);
+        const btn = document.getElementById('musicBtn');
+        btn.textContent = playing ? '⏸️ إيقاف الموسيقى' : '✅ تم التشغيل - إيقاف';
       }
     }
   });
 }
-function toggleMusic(){
-  if(!player){
-    // أنشئ الـ player فقط عند الحاجة
-    onYouTubeIframeAPIReady();
-    setTimeout(()=>player.playVideo(),500);
+
+function toggleMusic() {
+  if (!window.YT) {
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.body.appendChild(tag);
+    document.getElementById('musicBtn').textContent = '⏳ جاري التحميل...';
     return;
   }
-  if(playing)player.pauseVideo();else player.playVideo();
-}
-function showInfo(){
-  alert('developer website.');
+  if (playing) player.pauseVideo(); else player.playVideo();
 }
 
-// تحميل يوتيوب عند الحاجة فقط
-let ytLoaded=false;
-function loadYT(){
-  if(ytLoaded)return;
-  ytLoaded=true;
-  const tag=document.createElement('script');
-  tag.src='https://www.youtube.com/iframe_api';
-  document.body.appendChild(tag);
+// --- Effects ---
+function startEverything() {
+  renderTable();
+  // Scramble
+  const el = document.getElementById('scrambleText');
+  const chars = '!@#$%^&*()_+=-';
+  let counter = 0;
+  const phrases = ['مرحباً بالجميع', 'العمل قيد الإنشاء', 'سيتم الإطلاق قريباً'];
+  
+  function solve(newText) {
+    const oldText = el.innerText;
+    const length = Math.max(oldText.length, newText.length);
+    let frame = 0;
+    const queue = [];
+    for (let i = 0; i < length; i++) {
+      queue.push({ from: oldText[i] || '', to: newText[i] || '', start: Math.floor(Math.random()*40), end: Math.floor(Math.random()*40) + 40 });
+    }
+    function update() {
+      let output = ''; let complete = 0;
+      for (let i = 0; i < queue.length; i++) {
+        let { from, to, start, end, char } = queue[i];
+        if (frame >= end) { complete++; output += to; }
+        else if (frame >= start) { if (!char || Math.random() < 0.28) { char = chars[Math.floor(Math.random()*chars.length)]; queue[i].char = char; } output += `<span class="dud">${char}</span>`; }
+        else { output += from; }
+      }
+      el.innerHTML = output;
+      if (complete !== queue.length) { requestAnimationFrame(update); frame++; }
+    }
+    update();
+  }
+
+  const next = () => { solve(phrases[counter]); counter = (counter + 1) % phrases.length; setTimeout(next, 4000); };
+  next();
+
+  // Typewriter
+  let ti = 0; const txt = "أهلاً بالعالم، ...";
+  const type = () => { if(ti < txt.length){ document.getElementById('typewriter').innerHTML += txt.charAt(ti); ti++; setTimeout(type, 50); } };
+  type();
+
+  // Countdown
+  setInterval(() => {
+    const diff = Math.max(0, launchDate - new Date());
+    const d = Math.floor(diff/(1000*60*60*24));
+    const h = String(Math.floor((diff%(1000*60*60*24))/(1000*60*60))).padStart(2,'0');
+    const m = String(Math.floor((diff%(1000*60*60))/(1000*60))).padStart(2,'0');
+    const s = String(Math.floor((diff%(1000*60))/1000)).padStart(2,'0');
+    document.getElementById('countdown').textContent = `${d} يوم ${h}:${m}:${s}`;
+  }, 1000);
 }
 
-// تشغيل الـ scramble وتحميل الـ youtube عند أول تفاعل
-document.addEventListener('click',function loadOnce(){
-  startScramble();
-  startTypewriter();
-  loadYT();
-  document.removeEventListener('click',loadOnce);
-},{once:true});
+document.addEventListener('click', function init() {
+  startEverything();
+  const container=document.getElementById('dots'); container.style.display = 'block';
+  for(let i=0;i<15;i++){
+    const d=document.createElement('div'); d.className='dot'; d.style.left=Math.random()*100+'%';
+    d.style.animationDuration=(10+Math.random()*8)+'s'; container.appendChild(d);
+  }
+  if (!window.YT) {
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.body.appendChild(tag);
+  }
+  document.removeEventListener('click', init);
+}, {once: true});
 
-// تفعيل تغيير اللغة مع الـ scramble
-document.getElementById('lang').addEventListener('change', changeLangWithScramble);
+function toggleEffects(){ const dots = document.getElementById('dots'); dots.style.display = (dots.style.display === 'none') ? 'block' : 'none'; }
 </script>
 </body>
 </html>
