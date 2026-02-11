@@ -100,13 +100,13 @@
 const launchDate = new Date('2026-12-25T00:00:00');
 
 const worksData = [
-  {name: "website not name", side: "يمين", status: "قيد الإنشاء", url: "-"},
-  {name: "lovers anime", side: "وسط", status: "مكتمل", url: "قريبا ينشر"},
-  {name: "service mail", side: "يسار", status: "مكتمل", url: "قريبا ينشر"},
-  {name: "more", side: "يمين", status: "قيد انشاء لاحقا", url: "-"},
-  {name: "plateform no public", side: "وسط", status: "قيد انشاء", url: "🔒 Private System"},
-  {name: "lovers films", side: "يسار", status: "شبه مكتمل", url: "#"},
-  {name: "service other", side: "يمين", status: "مكتمل", url: "قريبا ينشر"}
+  {name: "website not name", status: "قيد الإنشاء", url: "-"},
+  {name: "lovers anime", status: "مكتمل", url: "قريبا ينشر"},
+  {name: "service mail", status: "مكتمل", url: "قريبا ينشر"},
+  {name: "more", status: "قيد انشاء لاحقا", url: "-"},
+  {name: "plateform no public", status: "قيد انشاء", url: "🔒 Private System"},
+  {name: "lovers films", status: "شبه مكتمل", url: "#"},
+  {name: "service other", status: "مكتمل", url: "قريبا ينشر"}
 ];
 
 function renderTable() {
@@ -116,7 +116,6 @@ function renderTable() {
     let statusClass = (w.status === 'مكتمل') ? 'status-done' : (w.status === 'قيد انشاء لاحقا' ? 'status-later' : 'status-wait');
     tbody.innerHTML += `<tr>
       <td style="color:#0f0; font-weight:bold;">${w.name}</td>
-      <td>${w.side}</td>
       <td class="${statusClass}">${w.status}</td>
       <td>${w.url}</td>
     </tr>`;
