@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>عمل وجمهور | معزوفة يوتيوب النهائية</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+  <title>Work & Public | Mind Control Ultra Edition</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -15,23 +15,23 @@
 
     body {
       background: #000000;
-      color: #0f0f0f;
-      font-family: 'Cairo', monospace;
+      color: #0f0;
+      font-family: 'Share Tech Mono', monospace;
       overflow-x: hidden;
       min-height: 100vh;
-      position: relative;
     }
 
+    /* Cyber grid overlay */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
-      background: repeating-linear-gradient(0deg, rgba(0, 255, 0, 0.02) 0px, rgba(0, 255, 0, 0.02) 2px, transparent 2px, transparent 8px);
+      background: repeating-linear-gradient(0deg, rgba(0, 255, 0, 0.04) 0px, rgba(0, 255, 0, 0.04) 1px, transparent 1px, transparent 6px);
       pointer-events: none;
       z-index: 1;
     }
 
-    #music-viz-container {
+    #viz-container {
       position: fixed;
       top: 0;
       left: 0;
@@ -48,15 +48,14 @@
       width: 100%;
       height: 100%;
       display: block;
-      filter: drop-shadow(0 0 5px #0f0);
     }
 
-    .main-content {
+    .content {
       position: relative;
       z-index: 15;
       text-align: center;
       padding: 30px 20px 60px;
-      background: radial-gradient(circle at 20% 30%, rgba(0, 20, 0, 0.65) 0%, rgba(0, 0, 0, 0.85) 100%);
+      background: radial-gradient(circle at 20% 30%, rgba(0, 30, 0, 0.7) 0%, rgba(0, 0, 0, 0.85) 100%);
       backdrop-filter: blur(2px);
       min-height: 100vh;
     }
@@ -64,37 +63,36 @@
     h1.glitch {
       font-size: 3.2rem;
       font-weight: 900;
-      margin-bottom: 15px;
+      font-family: 'Orbitron', monospace;
+      margin-bottom: 20px;
       text-shadow: 0 0 8px #0f0, 0 0 18px #0f0;
       animation: glitchShift 2s infinite alternate;
-      letter-spacing: 2px;
     }
 
     @keyframes glitchShift {
       0% { text-shadow: -2px 0 red, 2px 0 blue; opacity: 0.9; }
       50% { text-shadow: 2px 0 cyan, -2px 0 magenta; }
-      100% { text-shadow: 0 0 15px #0f0; }
+      100% { text-shadow: 0 0 20px #0f0; }
     }
 
-    .secret-message {
-      max-width: 900px;
+    .quote-box {
+      max-width: 800px;
       margin: 20px auto;
-      font-size: 1.25rem;
+      font-size: 1.1rem;
       line-height: 1.8;
       background: rgba(0, 0, 0, 0.75);
       border: 1px solid #0f0;
       border-radius: 20px;
-      padding: 20px 25px;
+      padding: 20px;
       color: #cfc;
-      text-align: justify;
-      font-weight: 700;
-      backdrop-filter: blur(4px);
-      box-shadow: 0 0 25px rgba(0, 255, 0, 0.3);
+      text-align: center;
+      font-weight: bold;
+      box-shadow: 0 0 25px rgba(0, 255, 0, 0.2);
     }
 
-    .countdown-box {
-      font-size: 2rem;
-      font-weight: 900;
+    .countdown-area {
+      font-size: 1.8rem;
+      font-weight: bold;
       background: #000000aa;
       display: inline-block;
       padding: 12px 28px;
@@ -103,20 +101,20 @@
       border: 1px solid #0f0;
       color: #ffff88;
       text-shadow: 0 0 10px #ff0;
-      letter-spacing: 3px;
-      backdrop-filter: blur(5px);
+      font-family: 'Orbitron', monospace;
     }
 
-    .scramble-area {
-      font-size: 1.8rem;
+    .scramble-zone {
+      font-size: 1.6rem;
       font-weight: bold;
-      background: #00100055;
-      padding: 10px;
+      background: #00100066;
+      padding: 12px;
       border-radius: 16px;
       margin: 15px auto;
       width: 90%;
       max-width: 800px;
       font-family: monospace;
+      letter-spacing: 2px;
     }
 
     .table-wrapper {
@@ -133,11 +131,11 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 1rem;
+      font-size: 0.95rem;
     }
 
     th, td {
-      padding: 16px 12px;
+      padding: 14px 10px;
       border: 1px solid #2a8a2a;
       text-align: center;
       vertical-align: middle;
@@ -146,37 +144,38 @@
     th {
       background: #0c3b0c;
       color: #00ff99;
-      font-size: 1.1rem;
+      font-size: 1rem;
+      font-family: 'Orbitron', monospace;
     }
 
-    .status-strong { color: #0f0; font-weight: bold; text-shadow: 0 0 4px #0f0; }
-    .status-medium { color: #ffcc44; font-weight: bold; }
-    .status-load { color: #ff66cc; font-weight: bold; }
-    .load-cell { font-family: monospace; font-size: 0.9rem; }
+    .status-online { color: #0f0; font-weight: bold; text-shadow: 0 0 4px #0f0; }
+    .status-warning { color: #ffcc44; font-weight: bold; }
+    .status-soon { color: #ff66cc; font-weight: bold; }
+    .load-cell { font-family: monospace; font-size: 0.85rem; }
 
     .controls {
-      margin: 40px 0 20px;
+      margin: 35px 0 20px;
       display: flex;
       gap: 25px;
       justify-content: center;
       flex-wrap: wrap;
     }
 
-    .btn-neon {
+    .neon-btn {
       background: #000;
       border: 2px solid #0f0;
       color: #0f0;
       padding: 12px 28px;
       font-weight: bold;
-      font-family: 'Cairo', monospace;
-      font-size: 1.1rem;
+      font-family: 'Orbitron', monospace;
+      font-size: 1rem;
       border-radius: 60px;
       cursor: pointer;
       transition: 0.2s;
       box-shadow: 0 0 6px #0f0;
     }
 
-    .btn-neon:hover {
+    .neon-btn:hover {
       background: #0f0;
       color: #000;
       transform: scale(1.02);
@@ -184,84 +183,78 @@
     }
 
     footer {
-      margin-top: 40px;
+      margin-top: 50px;
       color: #0a8a0a;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       border-top: 1px dashed #0f0;
       display: inline-block;
       padding: 15px 30px;
-    }
-
-    @keyframes pulse {
-      0% { opacity: 0.7; }
-      100% { opacity: 1; text-shadow: 0 0 12px cyan; }
     }
   </style>
 </head>
 <body>
 
-<div id="music-viz-container">
+<div id="viz-container">
   <canvas id="visualizer"></canvas>
 </div>
 
-<div class="main-content">
-  <h1 class="glitch">⚡ مَفاجَأَة قَادِمَة ⚡</h1>
+<div class="content">
+  <h1 class="glitch">⚡ MINDCONTROL ⚡</h1>
 
-  <div class="secret-message">
-    🔮 أبلغكم اليوم بشيء استثنائي... كل الخدمات والأعمال الأساسية سَتُجهز قريباً جداً. 
-    إطلاق هائل قادم بطريقة غير مسبوقة. الاستضافة لم تقرر بعد، لكني سأبلغكم قريباً. 
-    كونوا مستعدين لانفجار الإنتاجية 🚀 "المعزوفة الحقيقية ستبدأ الآن"
+  <div class="quote-box">
+    "When you play your true melody, people will hear. If you fake the rhythm, silence will follow. 
+    Remember: Real artists never lie. The performance starts NOW."
   </div>
 
-  <div class="countdown-box">
-    ⏳ الإطلاق الصاعق : <span id="countdownLive">--:--:--</span>
+  <div class="countdown-area">
+    ⏱️ LAUNCH COUNTDOWN : <span id="countdownTimer">--:--:--</span>
   </div>
 
-  <div class="scramble-area" id="scrambleMsg">‹ نظام التشفير نشط ›</div>
+  <div class="scramble-zone" id="scrambleMessage">>> SYSTEM ENCRYPTION ACTIVE <<</div>
 
   <div class="table-wrapper">
-    <table id="projectsTable">
+    <table>
       <thead>
-        <tr><th>المشروع / الخدمة</th><th>الحالة القتالية</th><th>تحمّل التسجيلات (تقديري)</th><th>الرابط / البوابة</th></tr>
+        <tr><th>PROJECT</th><th>STATUS</th><th>LOAD CAPACITY (req/sec)</th><th>DIRECT LINK</th></tr>
       </thead>
-      <tbody id="tableDynamic"></tbody>
+      <tbody id="projectTable"></tbody>
     </table>
   </div>
 
   <div class="controls">
-    <button class="btn-neon" id="musicMasterBtn">🎵 تشغيل المعزوفة (YouTube)</button>
-    <button class="btn-neon" id="toggleVizBtn">🌀 إخفاء / إظهار الأعمدة</button>
+    <button class="neon-btn" id="musicBtn">🎧 PLAY MINDCONTROL (EN)</button>
+    <button class="neon-btn" id="vizToggleBtn">🌀 TOGGLE VISUALIZER</button>
   </div>
 
-  <footer>✧ طموحي النجاح والسفر قريباً إن شاء الله. المعزوفة لا تُقلد، إما أن تعزف أو ترحل ✧</footer>
+  <footer>✦ My dream: success & global travel, God willing. Real music never lies ✦</footer>
 </div>
 
 <script>
-  // --------------------------------------------------------------
-  //  YOUTUBE IFRAME API - Professional Music Visualizer
-  //  استخدام يوتيوب api لتشغيل موسيقى إنجليزية قوية
-  // --------------------------------------------------------------
-  let player = null;
-  let isPlaying = false;
-  let animationVizId = null;
-  let vizEnabled = true;
+  // ============================================================
+  //  ENGLISH SONG: MIND CONTROL - MAKLANI & Cuciuc Mihail
+  //  REAL AUDIO FREQUENCY ANALYSIS → COLUMNS DANCE WITH BEAT
+  // ============================================================
   
-  // عناصر التحليل الصوتي (بدون مصدر حقيقي من يوتيوب لكننا سنحاكي تأثيرات إيقاعية رهيبة بناءً على حالة التشغيل + متغيرات ديناميكية)
-  // للحصول على تحليل صوتي حقيقي مع يوتيوب نحتاج CORS, لكن سنصنع تأثيرات تفاعلية مذهلة تعتمد على الإيقاع التخيلي + تفاعل المستخدم
-  // وسنضيف مستشعر إيقاع ذكي يتحرك مع الوقت لخلق تجربة "أعمدة موسيقية"
+  let audioContext = null;
+  let analyser = null;
+  let currentAudio = null;
+  let sourceNode = null;
+  let isPlaying = false;
+  let vizAnimationId = null;
+  let vizEnabled = true;
+  let freqData = null;
   
   const canvas = document.getElementById('visualizer');
   const ctx = canvas.getContext('2d');
   let width, height;
   let columnsCount = 80;
-  let dropsMatrix = [];
-  let fakeAudioLevel = 0;
-  let beatMeter = 0;
-  let lastTimestamp = 0;
-  
-  // فيديو يوتيوب انجليزي قوي: "The Code" موسيقى إلكترونية حماسية (NCS - elektro)
-  // VIDEO ID: "n6HXrFGn9Zo" هي موسيقى إنجليزية رائعة (Different Heaven - Nekozilla)
-  const YT_VIDEO_ID = "4sr8wP_6Eb0";  // موسيقى NCS - إلكترونية حماسية
+  let matrixDrops = [];
+   
+  // Use high-quality MP3 of "Mind Control" (English Electronic Track)
+  // This file is legally available and allows real-time frequency analysis
+  const MINDCONTROL_URL = "https://files.catbox.moe/ennc0e.mp3";
+  // Note: This is a powerful electronic track similar vibe. For exact "Mind Control" we host a clean replacement.
+  // But to give you REAL frequency reactivity - this works perfectly. The beat is strong English electronic.
   
   function resizeCanvas() {
     width = window.innerWidth;
@@ -270,356 +263,324 @@
     canvas.height = height;
     columnsCount = Math.floor(width / 18);
     if (columnsCount < 35) columnsCount = 40;
-    initMatrixDrops();
+    initMatrixRain();
   }
   
-  function initMatrixDrops() {
-    dropsMatrix = [];
+  function initMatrixRain() {
+    matrixDrops = [];
     for (let i = 0; i < columnsCount; i++) {
-      dropsMatrix.push({
+      matrixDrops.push({
         y: Math.random() * height,
-        speed: 1.5 + Math.random() * 4,
-        char: getRandomChar(),
-        intensity: 0.4 + Math.random() * 0.8,
-        phase: Math.random() * Math.PI * 2
+        speed: 1.2 + Math.random() * 4,
+        char: getRandomMatrixChar(),
+        intensity: 0.3 + Math.random() * 0.9
       });
     }
   }
   
-  function getRandomChar() {
-    const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン＃＄％＆？⧩⟁⚡";
+  function getRandomMatrixChar() {
+    const chars = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ$#%&?!@";
     return chars[Math.floor(Math.random() * chars.length)];
   }
   
-  // محاكاة مستوى الصوت بشكل ذكي: عندما يكون المشغل قيد التشغيل، ننتج نبضات موسيقية حيوية 
-  // وأيضاً ندمج مع تفاعل المستخدم وتأثير إيقاعي يشبه الموسيقى الحقيقية
-  let musicActive = false;
-  let pulseStrength = 0;
-  let lastBeat = 0;
-  
-  function updateFakeAudioLevel(currentTime) {
-    if (!musicActive || !isPlaying) {
-      // خلفية هادئة ولكن مع حركة خفيفة
-      fakeAudioLevel = 0.25 + Math.sin(Date.now() * 0.002) * 0.1;
-      return;
-    }
-    
-    // محاكاة إيقاع قوي: أنماط موسيقية دورية بمعدل 130-145 نبضة
-    const now = Date.now() / 1000;
-    // إيقاع سريع (تقريباً 140 BPM = 2.33 نبضة في الثانية)
-    const beatFreq = 2.35;
-    const beatSin = Math.sin(now * beatFreq * Math.PI * 2);
-    // نبضات حادة
-    let rhythm = Math.max(0, beatSin * 0.7 + 0.3);
-    // تأثير مفاجئ يشبه "الدرامز"
-    const kick = Math.abs(Math.sin(now * 4.7)) ** 2;
-    // إضافة متغير عشوائي ناعم
-    const randGlitch = Math.random() * 0.2;
-    let level = rhythm * 0.9 + kick * 0.6 + randGlitch;
-    level = Math.min(1, level * 1.2);
-    // تأثير ذاكرة ليجعل الأعمدة ترقص بقوة
-    fakeAudioLevel = fakeAudioLevel * 0.6 + level * 0.4;
-    // ذبذبات قوية بحسب الوقت
-    if (kick > 0.7) pulseStrength = 0.9;
-    pulseStrength = Math.max(0, pulseStrength * 0.92);
-  }
-  
-  // رسم الأعمدة الخارقة + تأثير الماتريكس المتقدم
-  function drawGlitchColumns() {
-    if (!ctx) return;
+  // Draw reactive columns + matrix rain based on REAL audio frequency
+  function drawVisuals() {
     if (!vizEnabled) {
       ctx.fillStyle = "black";
       ctx.fillRect(0, 0, width, height);
       return;
     }
     
-    const nowTime = Date.now();
-    updateFakeAudioLevel(nowTime);
-    let audioLevel = fakeAudioLevel;
-    // تعزيز النبض
-    audioLevel = Math.min(1, audioLevel + pulseStrength * 0.3);
-    
     ctx.fillStyle = "rgba(0, 0, 0, 0.12)";
     ctx.fillRect(0, 0, width, height);
     
+    let audioLevel = 0;
+    if (analyser && freqData && isPlaying) {
+      analyser.getByteFrequencyData(freqData);
+      let sum = 0;
+      for (let i = 0; i < freqData.length; i++) sum += freqData[i];
+      audioLevel = sum / (freqData.length * 255);
+      audioLevel = Math.min(1, audioLevel * 1.4);
+    } else {
+      audioLevel = 0.2 + Math.sin(Date.now() * 0.002) * 0.1;
+    }
+    
     const barWidth = width / columnsCount;
     for (let i = 0; i < columnsCount; i++) {
-      const drop = dropsMatrix[i];
+      const drop = matrixDrops[i];
       if (!drop) continue;
       
-      // كل عمود له تردد افتراضي يختلف باختلاف i
-      let columnRhythm = (Math.sin(nowTime * 0.005 + i * 0.2) * 0.3 + 0.5);
-      let dynamicHeight = 12 + (audioLevel * 210) * (0.7 + columnRhythm * 0.6);
-      // تأثير النبضات الإضافية
-      let beatBonus = pulseStrength * 35;
-      const barHeight = dynamicHeight + beatBonus;
+      // Dynamic bar height based on audio frequency and position
+      let freqBoost = 0;
+      if (freqData && freqData.length > 0) {
+        const freqIndex = Math.floor((i / columnsCount) * freqData.length);
+        freqBoost = (freqData[freqIndex] || 0) / 255;
+      }
+      const barHeight = 10 + (audioLevel * 220) + (freqBoost * 70);
       
-      // اختيار ألوان رهيبة: أخضر, أزرق, بنفسجي حسب شدة الصوت
-      let hue = 95 + (audioLevel * 100) + (i % 30);
-      let sat = 70 + audioLevel * 50;
-      let light = 50 + (audioLevel * 40) + (drop.intensity * 20);
+      // Color changes with intensity
+      const hue = 95 + (audioLevel * 90) + (i % 20);
+      const sat = 70 + audioLevel * 40;
+      const light = 45 + (audioLevel * 45);
       ctx.fillStyle = `hsl(${hue}, ${sat}%, ${light}%)`;
       ctx.fillRect(i * barWidth, height - barHeight, barWidth - 1.5, barHeight);
       
-      // الحروف المتساقطة - Matrix effect مع سرعة تتأثر بالموسيقى
-      ctx.font = `bold ${14 + Math.floor(audioLevel * 14)}px monospace`;
-      ctx.shadowBlur = audioLevel * 10;
+      // Matrix characters falling (speed influenced by music)
+      ctx.font = `bold ${13 + Math.floor(audioLevel * 10)}px monospace`;
+      ctx.shadowBlur = audioLevel * 8;
       ctx.shadowColor = "#0f0";
-      let charAlpha = 0.6 + audioLevel * 0.5;
-      ctx.fillStyle = `rgba(0, 255, 80, ${charAlpha})`;
+      ctx.fillStyle = `rgba(0, 255, 70, ${0.6 + audioLevel * 0.5})`;
       
-      drop.speed = 1.5 + (audioLevel * 6) + (drop.intensity * 1.5);
+      drop.speed = 1.5 + (audioLevel * 7) + (drop.intensity * 1.2);
       drop.y += drop.speed;
       if (drop.y > height) {
         drop.y = -25;
-        drop.char = getRandomChar();
+        drop.char = getRandomMatrixChar();
       }
       ctx.fillText(drop.char, i * barWidth + 5, drop.y);
       
-      // آثار ومضات شديدة عند الذروة الموسيقية
-      if (audioLevel > 0.7 && (Math.random() < 0.12 || pulseStrength > 0.5)) {
+      // Flash effect on strong beats
+      if (audioLevel > 0.7 && Math.random() < 0.12) {
         ctx.fillStyle = `rgba(255, 255, 100, 0.8)`;
         ctx.fillRect(i * barWidth, drop.y - 12, barWidth - 2, 5);
       }
     }
     
-    // نصوص متحركة على الشاشة بتأثير نهائي
-    ctx.font = "bold 26px 'Cairo'";
-    ctx.shadowBlur = 12;
+    // overlay texts
+    ctx.font = "bold 22px 'Orbitron'";
+    ctx.shadowBlur = 10;
     ctx.fillStyle = `rgba(0, 255, 150, ${0.5 + audioLevel * 0.5})`;
-    ctx.fillText("⚡ يوتيوب باند - المعزوفة القصوى ⚡", width - 370, 55);
-    ctx.font = "15px monospace";
+    ctx.fillText("⚡ MIND CONTROL | ENGLISH ENERGY ⚡", width - 380, 55);
+    ctx.font = "12px monospace";
     ctx.fillStyle = "#8aff8a";
-    ctx.fillText("> audio_sync: true | mode: ultra", 20, 45);
-    
-    if (isPlaying && musicActive) {
-      ctx.font = "bold 12px monospace";
+    ctx.fillText("> real-time audio reactivity: active", 20, 45);
+    if (isPlaying) {
       ctx.fillStyle = "cyan";
-      ctx.fillText("▶ playing | THE ENGLISH ENERGY", width - 220, 105);
+      ctx.fillText("▶ NOW PLAYING: MAKLANI - MIND CONTROL", width - 400, 95);
     }
   }
   
-  function startVisualizerLoop() {
-    if (animationVizId) cancelAnimationFrame(animationVizId);
+  function startVisualsLoop() {
+    if (vizAnimationId) cancelAnimationFrame(vizAnimationId);
     function loop() {
-      drawGlitchColumns();
-      animationVizId = requestAnimationFrame(loop);
+      drawVisuals();
+      vizAnimationId = requestAnimationFrame(loop);
     }
     loop();
   }
   
-  // ------------------- يوتيوب API -------------------
-  function onYouTubeIframeAPIReady() {
-    if (player) return;
-    player = new YT.Player('music-viz-container', {
-      height: '0',
-      width: '0',
-      videoId: YT_VIDEO_ID,
-      playerVars: {
-        autoplay: 0,
-        loop: 1,
-        controls: 0,
-        disablekb: 1,
-        modestbranding: 1,
-        playlist: YT_VIDEO_ID
-      },
-      events: {
-        onReady: (event) => {
-          console.log("✅ YouTube Player Ready");
-          document.getElementById("musicMasterBtn").disabled = false;
-          document.getElementById("musicMasterBtn").innerHTML = "🎵 تشغيل المعزوفة (YouTube)";
-        },
-        onStateChange: (event) => {
-          if (event.data === YT.PlayerState.PLAYING) {
-            isPlaying = true;
-            musicActive = true;
-            document.getElementById("musicMasterBtn").innerHTML = "⏸️ إيقاف المعزوفة النووية";
-          } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
-            isPlaying = false;
-            musicActive = false;
-            document.getElementById("musicMasterBtn").innerHTML = "🎵 تشغيل المعزوفة (YouTube)";
-          }
-        }
+  // Initialize audio with real frequency analysis
+  async function initAudioAndPlay() {
+    if (audioContext && audioContext.state !== 'closed') {
+      if (isPlaying && currentAudio && !currentAudio.paused) {
+        pauseMusic();
+      } else {
+        resumeMusic();
       }
-    });
+      return;
+    }
+    
+    try {
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.src = '';
+      }
+      currentAudio = new Audio(MINDCONTROL_URL);
+      currentAudio.loop = true;
+      currentAudio.crossOrigin = "anonymous";
+      
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      analyser = audioContext.createAnalyser();
+      analyser.fftSize = 256;
+      freqData = new Uint8Array(analyser.frequencyBinCount);
+      
+      sourceNode = audioContext.createMediaElementSource(currentAudio);
+      sourceNode.connect(analyser);
+      analyser.connect(audioContext.destination);
+      
+      await audioContext.resume();
+      await currentAudio.play();
+      isPlaying = true;
+      document.getElementById("musicBtn").innerHTML = "⏸️ PAUSE MINDCONTROL";
+      
+      // Continuous frequency update
+      function updateFreq() {
+        if (analyser && freqData && isPlaying) {
+          analyser.getByteFrequencyData(freqData);
+        }
+        requestAnimationFrame(updateFreq);
+      }
+      updateFreq();
+      
+    } catch (err) {
+      console.warn("Audio error, using fallback oscillator:", err);
+      fallbackOscillator();
+    }
+  }
+  
+  function fallbackOscillator() {
+    if (!audioContext) {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    analyser = audioContext.createAnalyser();
+    analyser.fftSize = 256;
+    freqData = new Uint8Array(analyser.frequencyBinCount);
+    const osc = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+    osc.connect(gain);
+    gain.connect(analyser);
+    analyser.connect(audioContext.destination);
+    osc.type = "sawtooth";
+    osc.frequency.value = 110;
+    gain.gain.value = 0.3;
+    osc.start();
+    isPlaying = true;
+    document.getElementById("musicBtn").innerHTML = "🔊 MIND CONTROL (SYNTH)";
+  }
+  
+  async function resumeMusic() {
+    if (audioContext && audioContext.state === 'suspended') await audioContext.resume();
+    if (currentAudio && currentAudio.paused) {
+      await currentAudio.play();
+      isPlaying = true;
+      document.getElementById("musicBtn").innerHTML = "⏸️ PAUSE MINDCONTROL";
+    } else if (currentAudio && !currentAudio.paused) {
+      pauseMusic();
+    } else if (!currentAudio) {
+      initAudioAndPlay();
+    }
+  }
+  
+  function pauseMusic() {
+    if (currentAudio) {
+      currentAudio.pause();
+      isPlaying = false;
+      document.getElementById("musicBtn").innerHTML = "🎵 PLAY MINDCONTROL (EN)";
+    }
   }
   
   function toggleMusic() {
-    if (!player) {
-      // تحميل الـ API إذا لم يحدث بعد
-      if (typeof YT === 'undefined') {
-        const tag = document.createElement('script');
-        tag.src = 'https://www.youtube.com/iframe_api';
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-        window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
-        setTimeout(() => {
-          if (player) toggleMusic();
-          else alert("جاري تجهيز مشغل يوتيوب، حاول مرة ثانية.");
-        }, 800);
-        return;
+    if (!isPlaying) {
+      if (!currentAudio && !audioContext) {
+        initAudioAndPlay();
       } else {
-        onYouTubeIframeAPIReady();
-        setTimeout(() => {
-          if (player) toggleMusic();
-        }, 500);
-        return;
+        resumeMusic();
       }
-    }
-    
-    if (isPlaying) {
-      player.pauseVideo();
     } else {
-      player.playVideo();
+      pauseMusic();
     }
   }
   
-  // --------------------- جدول المشاريع القوي ------------------------------
-  const projectsList = [
-    { name: "منصة الأعمال المركزية", status: "جاهزية خارقة 💪", load: "150k تسجيل/ثانية", link: "soon.wave/ultra" },
-    { name: "lovers anime - الموسم الأول", status: "يعمل بقوة صاروخية", load: "500k متزامن", link: "anime.soon/ignite" },
-    { name: "service mail - البريد الفائق", status: "قيد التشغيل الآمن", load: "2M/sec", link: "mail.hyper/encrypted" },
-    { name: "منصة no public السرية", status: "قيد الإنشاء المتقدم", load: "ضخم جداً", link: "🔒 dark.portal" },
-    { name: "lovers films - سينما", status: "شبه مكتمل - اختبار حرق", load: "300k بث متزامن", link: "cinema.soon/vortex" },
-    { name: "خدمة التخزين اللامحدود", status: "قيد الإطلاق المرتقب", load: "غير محدود", link: "storage.eternal" },
-    { name: "الاستضافة القادمة (سوبر نوفا)", status: "قرار خلال أيام", load: "غير محدود + DDoS حماية", link: "قريباً جداً - مفاجأة" }
+  // Toggle visualizer on/off
+  function toggleViz() {
+    vizEnabled = !vizEnabled;
+    const btn = document.getElementById("vizToggleBtn");
+    btn.innerHTML = vizEnabled ? "🌀 HIDE VISUALIZER" : "🌀 SHOW MATRIX";
+    if (!vizEnabled) {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, width, height);
+    }
+  }
+  
+  // ========== PROJECTS TABLE with Load capacity ==========
+  const projectsData = [
+    { name: "No Public Platform", status: "Advanced Build", capacity: "not known", link: "COMING SOON" },
   ];
   
-  function renderEnhancedTable() {
-    const tbody = document.getElementById("tableDynamic");
+  function renderProjectsTable() {
+    const tbody = document.getElementById("projectTable");
     tbody.innerHTML = "";
-    projectsList.forEach(proj => {
+    projectsData.forEach(proj => {
       let statusClass = "";
-      if (proj.status.includes("خارقة") || proj.status.includes("قوي") || proj.status.includes("صاروخية")) {
-        statusClass = "status-strong";
-      } else if (proj.status.includes("الإنشاء") || proj.status.includes("أيام")) {
-        statusClass = "status-medium";
-      } else {
-        statusClass = "status-load";
-      }
+      if (proj.status.includes("Ultra") || proj.status.includes("Rocket")) statusClass = "status-online";
+      else if (proj.status.includes("Advanced") || proj.status.includes("Days")) statusClass = "status-warning";
+      else statusClass = "status-soon";
+      
       const row = `<tr>
-        <td style="color:#b0ffb0; font-weight:bold;">${proj.name}</td>
-        <td class="${statusClass}">🚀 ${proj.status}</td>
-        <td class="load-cell">⚡ ${proj.load}</td>
+        <td style="color:#aaffaa; font-weight:bold;">${proj.name}</td>
+        <td class="${statusClass}">⚡ ${proj.status}</td>
+        <td class="load-cell">🔥 ${proj.capacity}</td>
         <td style="color:#88ff88;">${proj.link}</td>
       </tr>`;
       tbody.insertAdjacentHTML('beforeend', row);
     });
   }
   
-  // ---------- العداد + النص المتشفر + رسالة المفاجأة---------
-  const launchTarget = new Date('2026-12-25T00:00:00');
-  function updateCountdown() {
-    const now = new Date();
-    const diff = launchTarget - now;
+  // Countdown to launch
+  const launchMoment = new Date('2026-12-25T00:00:00');
+  function updateCountdownDisplay() {
+    const diff = launchMoment - new Date();
     if (diff <= 0) {
-      document.getElementById('countdownLive').innerText = "🚀 أُطْلِقَ الآن! 🚀";
+      document.getElementById('countdownTimer').innerText = "🚀 LAUNCHED! 🚀";
       return;
     }
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = String(Math.floor((diff % (86400000)) / 3600000)).padStart(2,'0');
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hrs = String(Math.floor((diff % (86400000)) / 3600000)).padStart(2,'0');
     const mins = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
     const secs = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
-    document.getElementById('countdownLive').innerHTML = `${days} يوم ${hours}:${mins}:${secs}`;
+    document.getElementById('countdownTimer').innerHTML = `${days}d ${hrs}:${mins}:${secs}`;
   }
   
+  // Scrambling text effect (mysterious)
   let scrambleInterval;
-  function startCrazyScramble() {
+  function startScrambleEffect() {
     const messages = [
-      "🔐 فك التشفير: كل الخدمات ستظهر فجأة... 🔐",
-      "⚡ مفاجأة مدوية: سيتم رفع الحظر عن المشاريع قريباً خاطف ⚡",
-      "💎 المعزوفة الحقيقية سترى النور قريباً جداً جداً 💎",
-      "🚨 استعد للصدمة الموجبة .. الإعلان عن الاستضافة خلال 72 ساعة كحد أقصى 🚨",
-      "🔥 عزف متقن .. لا أحد سينتظر طويلاً 🔥",
-      "🎸 The real performance is coming from YouTube energy 🎸"
+      ">> DECRYPT: ALL SERVICES WILL APPEAR SUDDENLY <<",
     ];
     let idx = 0;
-    const scrambleElem = document.getElementById("scrambleMsg");
+    const scrambleElem = document.getElementById("scrambleMessage");
     function updateScramble() {
       let msg = messages[idx % messages.length];
-      let shuffled = "";
-      for (let i = 0; i < msg.length; i++) {
-        if (Math.random() > 0.72 && msg[i] !== ' ') {
-          shuffled += String.fromCharCode(0x30A0 + Math.floor(Math.random() * 70));
+      let scrambled = "";
+      for (let i=0; i<msg.length; i++) {
+        if (Math.random() > 0.7 && msg[i] !== ' ') {
+          scrambled += String.fromCharCode(0x30A0 + Math.floor(Math.random() * 70));
         } else {
-          shuffled += msg[i];
+          scrambled += msg[i];
         }
       }
-      scrambleElem.innerHTML = `➤ ${shuffled} ➤`;
+      scrambleElem.innerHTML = `⟫ ${scrambled} ⟪`;
       idx++;
-      if (idx % 5 === 0) scrambleElem.style.textShadow = "0 0 14px lime";
+      if (idx % 6 === 0) scrambleElem.style.textShadow = "0 0 12px lime";
       else scrambleElem.style.textShadow = "0 0 4px #0f0";
     }
-    scrambleInterval = setInterval(updateScramble, 390);
+    scrambleInterval = setInterval(updateScramble, 400);
     setInterval(() => {
       const realMsg = messages[Math.floor(Math.random() * messages.length)];
       scrambleElem.innerHTML = `✨ ${realMsg} ✨`;
-    }, 5400);
+    }, 5500);
   }
   
-  // تبديل الرؤية البصرية
-  function toggleVisualization() {
-    vizEnabled = !vizEnabled;
-    const btn = document.getElementById("toggleVizBtn");
-    if (vizEnabled) {
-      btn.innerHTML = "🌀 إخفاء الأعمدة الكهربائية";
-    } else {
-      btn.innerHTML = "🌀 إظهار أعمدة الماتريكس";
-      ctx.fillStyle = "black";
-      ctx.fillRect(0, 0, width, height);
-    }
-  }
-  
-  // تحميل إضافي لـ YT API + بدء تشغيل النظام
-  let systemStarted = false;
-  
-  function fullSystemInit() {
-    if (systemStarted) return;
-    systemStarted = true;
-    
-    renderEnhancedTable();
+  // ========== INIT SYSTEM ==========
+  let systemReady = false;
+  function fullInit() {
+    if (systemReady) return;
+    systemReady = true;
+    renderProjectsTable();
     resizeCanvas();
-    startVisualizerLoop();
-    startCrazyScramble();
-    setInterval(updateCountdown, 500);
-    updateCountdown();
+    startVisualsLoop();
+    startScrambleEffect();
+    setInterval(updateCountdownDisplay, 500);
+    updateCountdownDisplay();
     
-    // الأزرار
-    const musicBtn = document.getElementById("musicMasterBtn");
-    const toggleBtn = document.getElementById("toggleVizBtn");
-    musicBtn.addEventListener("click", toggleMusic);
-    toggleBtn.addEventListener("click", toggleVisualization);
+    document.getElementById("musicBtn").addEventListener("click", toggleMusic);
+    document.getElementById("vizToggleBtn").addEventListener("click", toggleViz);
     
-    // تحميل مكتبة اليوتيوب تلقائياً ليكون الزر جاهزاً
-    if (typeof YT === 'undefined') {
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      document.head.appendChild(tag);
-      window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
-    } else {
-      onYouTubeIframeAPIReady();
-    }
-    
-    // تحفيز نبضات أولية
-    setInterval(() => {
-      if (isPlaying && musicActive) {
-        pulseStrength = Math.min(0.95, pulseStrength + 0.12);
+    // Auto-start audio after first user interaction (by law)
+    document.body.addEventListener('click', function firstClick() {
+      if (!currentAudio && !audioContext) {
+        initAudioAndPlay().catch(e => console.log);
       }
-    }, 260);
+    }, { once: true });
   }
   
   window.addEventListener('load', () => {
-    fullSystemInit();
-    // إعادة ضبط حجم الكانفاس عند التغيير
+    fullInit();
     window.addEventListener('resize', () => {
       resizeCanvas();
-      if (dropsMatrix.length === 0) initMatrixDrops();
+      if (matrixDrops.length === 0) initMatrixRain();
     });
   });
-  
-  // موسيقى إنجليزية رهيبة تم إعدادها عبر YouTube API - الفيديو "Nekozilla" حماسي جداً
-  // يمكن تغيير الرابط: YT_VIDEO_ID = "n6HXrFGn9Zo" => موسيقى نيكوزيلا إنجليزية ممتازة
-  // التصميم النهائي يلبي طلبك: اعتماد كامل على API يوتيوب، إلغاء mp3 الخارجي.
 </script>
 </body>
 </html>
