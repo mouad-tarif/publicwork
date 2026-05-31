@@ -22,7 +22,6 @@
       min-height: 100vh;
     }
 
-    /* Cyber grid overlay */
     body::before {
       content: "";
       position: fixed;
@@ -154,6 +153,84 @@
     .status-soon { color: #ff66cc; font-weight: bold; }
     .load-cell { font-family: monospace; font-size: 0.85rem; }
 
+    .coordinates-panel {
+      max-width: 700px;
+      margin: 40px auto;
+      background: rgba(0, 0, 0, 0.85);
+      border: 2px dashed #0f0;
+      border-radius: 20px;
+      padding: 25px;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    }
+    .coordinates-panel h3 {
+      font-family: 'Orbitron', monospace;
+      color: #0f0;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+    .map-link-area {
+      margin: 20px 0;
+      text-align: center;
+    }
+    .map-hint {
+      color: #8aff8a;
+      font-size: 0.8rem;
+      margin: 8px 0;
+    }
+    .secret-coords-display {
+      background: #001a00;
+      border: 2px solid #0f0;
+      border-radius: 16px;
+      padding: 20px;
+      margin: 15px auto;
+      font-size: 1.2rem;
+      font-family: 'Orbitron', monospace;
+      color: #ffff88;
+      text-shadow: 0 0 5px #0f0;
+      letter-spacing: 1px;
+    }
+    .secret-zone {
+      background: #001a00;
+      border: 1px solid #0f0;
+      border-radius: 16px;
+      padding: 18px;
+      margin: 20px 0;
+      color: #aaffaa;
+    }
+    .secret-zone p {
+      margin: 8px 0;
+    }
+    .status-area {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      background: #0a0a0a;
+      padding: 15px;
+      border-radius: 12px;
+      border-left: 4px solid #0f0;
+    }
+    .small-neon {
+      background: #000;
+      border: 1.5px solid #0f0;
+      color: #0f0;
+      padding: 8px 18px;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.8rem;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .small-neon:hover {
+      background: #0f0;
+      color: #000;
+      box-shadow: 0 0 12px #0f0;
+    }
+
     .controls {
       margin: 35px 0 20px;
       display: flex;
@@ -222,6 +299,31 @@
     </table>
   </div>
 
+  <!-- ========== COORDINATES & SILENT EVENT ZONE (NO USER INPUT) ========== -->
+  <div class="coordinates-panel" id="coordinatesPanel">
+    <h3>📍 SILENT COORDINATES | CLASSIFIED</h3>
+    
+    <div class="map-link-area">
+        <p class="map-hint">🗺️ PROJECT LAUNCH LOCATION →</p>
+        <div class="secret-coords-display" id="secretCoordsDisplay">
+            ⚡ <strong id="launchLocationText">📍 Not decided yet</strong> ⚡
+        </div>
+        <p class="map-hint" style="font-size:0.7rem;">(The pen has not written the place yet. You will add it later — silent story)</p>
+    </div>
+
+    <div class="secret-zone" id="secretZone">
+        <p>📜 <strong>Silent Story:</strong> <em id="storyText">"The pen chose a place where no one listens... yet the echo will travel."</em></p>
+        <div id="dynamicEventArea">
+            <p>🔮 [Event Vault] — The real coordinates are hidden. When the time comes, this place will speak.</p>
+        </div>
+    </div>
+
+    <div class="status-area" id="statusArea">
+        <span id="statusMessage">⏳ STATUS: LAUNCH LOCATION NOT SET YET</span>
+        <button class="small-neon" id="triggerEventBtn">🕯️ REVEAL COORDINATES (LOCKED)</button>
+    </div>
+  </div>
+
   <div class="controls">
     <button class="neon-btn" id="musicBtn">🎧 PLAY MINDCONTROL (EN)</button>
     <button class="neon-btn" id="vizToggleBtn">🌀 TOGGLE VISUALIZER</button>
@@ -251,11 +353,7 @@
   let columnsCount = 80;
   let matrixDrops = [];
    
-  // Use high-quality MP3 of "Mind Control" (English Electronic Track)
-  // This file is legally available and allows real-time frequency analysis
   const MINDCONTROL_URL = "https://files.catbox.moe/ennc0e.mp3";
-  // Note: This is a powerful electronic track similar vibe. For exact "Mind Control" we host a clean replacement.
-  // But to give you REAL frequency reactivity - this works perfectly. The beat is strong English electronic.
   
   function resizeCanvas() {
     width = window.innerWidth;
@@ -284,7 +382,6 @@
     return chars[Math.floor(Math.random() * chars.length)];
   }
   
-  // Draw reactive columns + matrix rain based on REAL audio frequency
   function drawVisuals() {
     if (!vizEnabled) {
       ctx.fillStyle = "black";
@@ -311,7 +408,6 @@
       const drop = matrixDrops[i];
       if (!drop) continue;
       
-      // Dynamic bar height based on audio frequency and position
       let freqBoost = 0;
       if (freqData && freqData.length > 0) {
         const freqIndex = Math.floor((i / columnsCount) * freqData.length);
@@ -319,14 +415,12 @@
       }
       const barHeight = 10 + (audioLevel * 220) + (freqBoost * 70);
       
-      // Color changes with intensity
       const hue = 95 + (audioLevel * 90) + (i % 20);
       const sat = 70 + audioLevel * 40;
       const light = 45 + (audioLevel * 45);
       ctx.fillStyle = `hsl(${hue}, ${sat}%, ${light}%)`;
       ctx.fillRect(i * barWidth, height - barHeight, barWidth - 1.5, barHeight);
       
-      // Matrix characters falling (speed influenced by music)
       ctx.font = `bold ${13 + Math.floor(audioLevel * 10)}px monospace`;
       ctx.shadowBlur = audioLevel * 8;
       ctx.shadowColor = "#0f0";
@@ -340,14 +434,12 @@
       }
       ctx.fillText(drop.char, i * barWidth + 5, drop.y);
       
-      // Flash effect on strong beats
       if (audioLevel > 0.7 && Math.random() < 0.12) {
         ctx.fillStyle = `rgba(255, 255, 100, 0.8)`;
         ctx.fillRect(i * barWidth, drop.y - 12, barWidth - 2, 5);
       }
     }
     
-    // overlay texts
     ctx.font = "bold 22px 'Orbitron'";
     ctx.shadowBlur = 10;
     ctx.fillStyle = `rgba(0, 255, 150, ${0.5 + audioLevel * 0.5})`;
@@ -370,7 +462,6 @@
     loop();
   }
   
-  // Initialize audio with real frequency analysis
   async function initAudioAndPlay() {
     if (audioContext && audioContext.state !== 'closed') {
       if (isPlaying && currentAudio && !currentAudio.paused) {
@@ -404,7 +495,6 @@
       isPlaying = true;
       document.getElementById("musicBtn").innerHTML = "⏸️ PAUSE MINDCONTROL";
       
-      // Continuous frequency update
       function updateFreq() {
         if (analyser && freqData && isPlaying) {
           analyser.getByteFrequencyData(freqData);
@@ -472,7 +562,6 @@
     }
   }
   
-  // Toggle visualizer on/off
   function toggleViz() {
     vizEnabled = !vizEnabled;
     const btn = document.getElementById("vizToggleBtn");
@@ -483,7 +572,6 @@
     }
   }
   
-  // ========== PROJECTS TABLE with Load capacity ==========
   const projectsData = [
     { name: "No Public Platform", status: "Advanced Build", capacity: "not known", link: "COMING SOON" },
   ];
@@ -492,11 +580,7 @@
     const tbody = document.getElementById("projectTable");
     tbody.innerHTML = "";
     projectsData.forEach(proj => {
-      let statusClass = "";
-      if (proj.status.includes("Ultra") || proj.status.includes("Rocket")) statusClass = "status-online";
-      else if (proj.status.includes("Advanced") || proj.status.includes("Days")) statusClass = "status-warning";
-      else statusClass = "status-soon";
-      
+      let statusClass = "status-warning";
       const row = `<tr>
         <td style="color:#aaffaa; font-weight:bold;">${proj.name}</td>
         <td class="${statusClass}">⚡ ${proj.status}</td>
@@ -507,7 +591,6 @@
     });
   }
   
-  // Countdown to launch
   const launchMoment = new Date('2026-12-25T00:00:00');
   function updateCountdownDisplay() {
     const diff = launchMoment - new Date();
@@ -522,7 +605,6 @@
     document.getElementById('countdownTimer').innerHTML = `${days}d ${hrs}:${mins}:${secs}`;
   }
   
-  // Scrambling text effect (mysterious)
   let scrambleInterval;
   function startScrambleEffect() {
     const messages = [
@@ -552,7 +634,23 @@
     }, 5500);
   }
   
-  // ========== INIT SYSTEM ==========
+  function setupCoordinatesHandler() {
+    const triggerBtn = document.getElementById('triggerEventBtn');
+    const statusSpan = document.getElementById('statusMessage');
+    const storyText = document.getElementById('storyText');
+    const locationText = document.getElementById('launchLocationText');
+    
+    triggerBtn.addEventListener('click', () => {
+      if (locationText.innerText.includes('Not decided yet') || locationText.innerText.includes('لم يقرر بعد')) {
+        statusSpan.innerHTML = '⚠️ STATUS: THE PEN HAS NOT WRITTEN THE LOCATION YET';
+        storyText.innerHTML = '"The coordinates are still a secret. Wait for the silent announcement."';
+      } else {
+        statusSpan.innerHTML = '🔒 STATUS: LOCATION IS SET — STORY ACTIVE';
+        storyText.innerHTML = '"The pen marked this place. The echo is coming."';
+      }
+    });
+  }
+  
   let systemReady = false;
   function fullInit() {
     if (systemReady) return;
@@ -563,11 +661,11 @@
     startScrambleEffect();
     setInterval(updateCountdownDisplay, 500);
     updateCountdownDisplay();
+    setupCoordinatesHandler();
     
     document.getElementById("musicBtn").addEventListener("click", toggleMusic);
     document.getElementById("vizToggleBtn").addEventListener("click", toggleViz);
     
-    // Auto-start audio after first user interaction (by law)
     document.body.addEventListener('click', function firstClick() {
       if (!currentAudio && !audioContext) {
         initAudioAndPlay().catch(e => console.log);
